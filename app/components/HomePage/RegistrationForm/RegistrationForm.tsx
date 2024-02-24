@@ -53,19 +53,19 @@ const RegistrationForm = () => {
     });
     const handleInputChange = (field: string, value: any) => {
         setSquadDetails((prev) => ({
-          ...prev,
-          [field]: value,
+            ...prev,
+            [field]: value,
         }));
     };
     const handleMemberInputChange = (memberNo: number, field: string, value: string) => {
         setSquadDetails((prev) => ({
-          ...prev,
-          [`squadMember${memberNo}`]: {
-            ...prev[`squadMember${memberNo}`],
-            [field]: value,
-          },
+            ...prev,
+            [`squadMember${memberNo}`]: {
+                ...prev[`squadMember${memberNo}`],
+                [field]: value,
+            },
         }));
-      };
+    };
 
     const [selectedMembers, setSelectedMembers] = useState<number | ''>('');
     const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -74,81 +74,81 @@ const RegistrationForm = () => {
 
         setSelectedMembers(parsedValue);
         if (typeof parsedValue === 'number') {
-          handleInputChange('squadSize', (parsedValue + 1).toString());
+            handleInputChange('squadSize', (parsedValue + 1).toString());
         }
     };
 
     const validateForm = () => {
 
         if (!squadDetails.squadName.trim()) {
-          alert('Squad Name is required');
-          return false;
+            alert('Squad Name is required');
+            return false;
         }
-    
+
         if (!squadDetails.squadSize.trim()) {
-          alert('Select the number of squad members');
-          return false;
+            alert('Select the number of squad members');
+            return false;
         }
 
         if (!squadDetails.squadMaster?.name?.trim()) {
-          alert('Squad Master name is required');
-          return false;
+            alert('Squad Master name is required');
+            return false;
         }
 
         if (!squadDetails.squadMaster?.registerNumber?.trim()) {
-          alert('Squad Master register number is required');
-          return false;
+            alert('Squad Master register number is required');
+            return false;
         }
 
         if (!squadDetails.squadMaster?.email?.trim()) {
-          alert('Squad Master email is required');
-          return false;
+            alert('Squad Master email is required');
+            return false;
         }
 
         if (!squadDetails.squadMaster?.department?.trim()) {
-          alert('Squad Master department is required');
-          return false;
+            alert('Squad Master department is required');
+            return false;
         }
 
         if (!squadDetails.squadMaster?.contactNumber?.trim()) {
-          alert('Squad Master contact number is required');
-          return false;
+            alert('Squad Master contact number is required');
+            return false;
         }
 
         if (selectedMembers) {
-          for (let i = 2; i <= selectedMembers + 1; i++) {
-            if (!validateMember(i)) {
-              return false;
+            for (let i = 2; i <= selectedMembers + 1; i++) {
+                if (!validateMember(i)) {
+                    return false;
+                }
             }
-          }
         }
-    
+
         return true;
     };
 
     const validateMember = (memberNo: number) => {
         if (!squadDetails[`squadMember${memberNo}`]?.name?.trim()) {
-          alert(`Squad Member ${memberNo} name is required`);
-          return false;
+            alert(`Squad Member ${memberNo} name is required`);
+            return false;
         }
-    
+
         if (!squadDetails[`squadMember${memberNo}`]?.registerNumber?.trim()) {
-          alert(`Squad Member ${memberNo} register number is required`);
-          return false;
+            alert(`Squad Member ${memberNo} register number is required`);
+            return false;
         }
-    
+
         if (!squadDetails[`squadMember${memberNo}`]?.email?.trim()) {
-          alert(`Squad Member ${memberNo} email is required`);
-          return false;
+            alert(`Squad Member ${memberNo} email is required`);
+            return false;
         }
-    
+
         if (!squadDetails[`squadMember${memberNo}`]?.department?.trim()) {
-          alert(`Squad Member ${memberNo} department is required`);
-          return false;
+            alert(`Squad Member ${memberNo} department is required`);
+            return false;
         }
         return true;
     };
-    
+
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -195,16 +195,65 @@ const RegistrationForm = () => {
 
                                             {/* Input Field */}
                                             <div>
-                                                <div className="lg:grid gap-4 lg:grid-cols-2 font-body font-semibold">
-                                                    <input 
-                                                        type="text" 
-                                                        className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none" 
-                                                        placeholder="Squad Name" 
-                                                        value={squadDetails.squadName} 
-                                                        onChange={(e) => handleInputChange('squadName', e.target.value.toUpperCase())} 
+                                                <div className="lg:grid gap-4 lg:grid-cols-2 font-body font-normal">
+                                                    <input
+                                                        type="text"
+                                                        className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none"
+                                                        placeholder="Squad Name"
+                                                        value={squadDetails.squadName}
+                                                        onChange={(e) => handleInputChange('squadName', e.target.value.toUpperCase())}
                                                     />
-                                                    
-                                                    <select 
+
+                                                    <div className="hs-dropdown relative inline-flex">
+                                                        <button
+                                                            id="hs-dropdown-default"
+                                                            type="button"
+                                                            className="hs-dropdown-toggle py-3 px-5 inline-flex w-full items-center gap-x-8 xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 text-sm text-gray-400 rounded-full bg-white disabled:opacity-50 disabled:pointer-events-none"
+                                                        >
+                                                            Squad members (2-5)
+                                                            <svg
+                                                                className="hs-dropdown-open:rotate-180 size-4"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width={24}
+                                                                height={24}
+                                                                viewBox="0 0 24 24"
+                                                                fill="none"
+                                                                stroke="currentColor"
+                                                                strokeWidth={2}
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                            >
+                                                                <path d="m6 9 6 6 6-6" />
+                                                            </svg>
+                                                        </button>
+                                                        <div
+                                                            className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
+                                                            aria-labelledby="hs-dropdown-default">
+                                                            <a
+                                                                className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                                href="#">
+                                                                2
+                                                            </a>
+                                                            <a
+                                                                className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                                href="#">
+                                                                3
+                                                            </a>
+                                                            <a
+                                                                className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                                href="#">
+                                                                4
+                                                            </a>
+                                                            <a
+                                                                className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                                href="#">
+                                                                5
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <select
                                                         className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 focus:border-orange rounded-full text-sm text-grey disabled:opacity-50 disabled:pointer-events-none hover:bg-orange-500"
                                                         onChange={handleSelectChange}
                                                         value={selectedMembers}
@@ -215,55 +264,55 @@ const RegistrationForm = () => {
                                                         <option value="3">4</option>
                                                         <option value="4">5</option>
                                                     </select>
-                                                    
-                                                    <input 
-                                                        type="text" 
-                                                        className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none" 
-                                                        placeholder="Squad Master"  
-                                                        value={squadDetails.squadMaster.name} 
+
+                                                    <input
+                                                        type="text"
+                                                        className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none"
+                                                        placeholder="Squad Master"
+                                                        value={squadDetails.squadMaster.name}
                                                         onChange={(e) => handleInputChange('squadMaster', { ...squadDetails.squadMaster, name: e.target.value })}
                                                     />
 
-                                                    <input 
-                                                        type="text" 
-                                                        className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none" 
-                                                        placeholder="Register Number" 
-                                                        value={squadDetails.squadMaster.registerNumber} 
+                                                    <input
+                                                        type="text"
+                                                        className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none"
+                                                        placeholder="Register Number"
+                                                        value={squadDetails.squadMaster.registerNumber}
                                                         onChange={(e) => handleInputChange('squadMaster', { ...squadDetails.squadMaster, registerNumber: e.target.value })}
                                                     />
 
-                                                    <input 
-                                                        type="text" 
-                                                        className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none" 
-                                                        placeholder="SquadMaster@srmist.edu.in" 
-                                                        value={squadDetails.squadMaster.email} 
+                                                    <input
+                                                        type="text"
+                                                        className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none"
+                                                        placeholder="SquadMaster@srmist.edu.in"
+                                                        value={squadDetails.squadMaster.email}
                                                         onChange={(e) => handleInputChange('squadMaster', { ...squadDetails.squadMaster, email: e.target.value })}
                                                     />
 
-                                                    <input 
-                                                        type="text" 
-                                                        className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none" 
-                                                        placeholder="Department" 
-                                                        value={squadDetails.squadMaster.department} 
+                                                    <input
+                                                        type="text"
+                                                        className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none"
+                                                        placeholder="Department"
+                                                        value={squadDetails.squadMaster.department}
                                                         onChange={(e) => handleInputChange('squadMaster', { ...squadDetails.squadMaster, department: e.target.value })}
                                                     />
 
-                                                    <input 
-                                                        type="text" 
+                                                    <input
+                                                        type="text"
                                                         pattern='[0-9]{10}'
                                                         title="10-digit phone number required"
                                                         className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none"
-                                                        placeholder="Contact Number" 
-                                                        value={squadDetails.squadMaster.contactNumber} 
+                                                        placeholder="Contact Number"
+                                                        value={squadDetails.squadMaster.contactNumber}
                                                         onChange={(e) => handleInputChange('squadMaster', { ...squadDetails.squadMaster, contactNumber: e.target.value })}
                                                     />
 
                                                 </div>
-                                                <div className="font-body font-semibold">
+                                                <div className="font-body font-normal">
                                                     {[...Array(selectedMembers)].map((_, index) => (
-                                                        <SquadMember 
+                                                        <SquadMember
                                                             key={index + 1}
-                                                            memberNo={index + 2} 
+                                                            memberNo={index + 2}
                                                             details={squadDetails[`squadMember${index + 2}`]}
                                                             onChange={handleMemberInputChange}
                                                         />
@@ -298,7 +347,7 @@ interface SquadMemberProps {
     };
     onChange: (memberNo: number, field: string, value: string) => void;
 }
-  
+
 const SquadMember: React.FC<SquadMemberProps> = ({ memberNo, details, onChange }) => {
 
     const handleFieldChange = (field: string, value: string) => {
@@ -312,35 +361,35 @@ const SquadMember: React.FC<SquadMemberProps> = ({ memberNo, details, onChange }
             </div>
             <div className="lg:grid gap-4 lg:grid-cols-2 ">
 
-                <input 
-                    type="text" 
-                    className="py-3 px-5 block w-full border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none" 
-                    placeholder={`Squad Member ${memberNo}`} 
-                    value={details.name} 
+                <input
+                    type="text"
+                    className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none"
+                    placeholder={`Squad Member ${memberNo}`}
+                    value={details.name}
                     onChange={(e) => handleFieldChange('name', e.target.value)}
                 />
 
-                <input 
-                    type="text" 
-                    className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none" 
-                    placeholder="Register Number" 
-                    value={details.registerNumber} 
+                <input
+                    type="text"
+                    className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none"
+                    placeholder="Register Number"
+                    value={details.registerNumber}
                     onChange={(e) => handleFieldChange('registerNumber', e.target.value)}
                 />
 
-                <input 
-                    type="text" 
-                    className="py-3 px-5 block w-full border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none" 
-                    placeholder={`SquadMaster${memberNo}@srmist.edu.in`} 
-                    value={details.email} 
+                <input
+                    type="text"
+                    className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none"
+                    placeholder={`SquadMaster${memberNo}@srmist.edu.in`}
+                    value={details.email}
                     onChange={(e) => handleFieldChange('email', e.target.value)}
                 />
 
-                <input 
-                    type="text" 
-                    className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none" 
-                    placeholder="Department" 
-                    value={details.department} 
+                <input
+                    type="text"
+                    className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none"
+                    placeholder="Department"
+                    value={details.department}
                     onChange={(e) => handleFieldChange('department', e.target.value)}
                 />
 
