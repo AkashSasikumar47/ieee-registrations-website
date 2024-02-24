@@ -8,11 +8,11 @@ const Footer = () => {
 
                 <div>
                     <a
-                        className="flex-none text-4xl font-head font-extrabold text-orange"
-                        href="#"
+                        className="flex items-center justify-center"
+                        href="hacktrix.ieeesrmist.com"
                         aria-label="Brand"
                     >
-                        HACKTRIX
+                        <img src="/Assets/Hacktrix_Logo.svg" alt="Hacktrix-Logo" className="w-36 h-16" />
                     </a>
                 </div>
 
