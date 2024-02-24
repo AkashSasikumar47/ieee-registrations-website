@@ -168,9 +168,9 @@ const RegistrationForm = () => {
                         {/* Hero */}
                         <div>
                             <div className="mt-4 md:mb-12 max-w-2xl">
-                                <h1 className="mb-4 font-bold text-black text-4xl lg:text-5xl">
-                                    Hacking makes you lose CTRL: Register for HackTrix-24
-                                </h1>
+                            <h1 className="mb-4 font-bold text-black text-4xl lg:text-5xl">
+                                Hacking makes you lose CTRL: Register for <span className="text-orange">HackTrix-24</span>
+                            </h1>
                                 <p className="text-gray-600">
                                     Embark on a journey of innovation and collaboration by registering for HackTrix-24! This is your chance to be part of a dynamic hackathon where brilliant minds come together to push the boundaries of technology. Whether you're a coding maestro, a design virtuoso, or a visionary with big ideas, HackTrix-24 welcomes you to showcase your talents and contribute to the future of tech.
                                 </p>
