@@ -127,7 +127,7 @@ const RegistrationForm = () => {
             }));
         }
     }, [selectedMembers]);
-    
+
     const validateForm = () => {
 
         if (!squadDetails.squadName.trim()) {
@@ -207,8 +207,8 @@ const RegistrationForm = () => {
             try {
                 setIsLoading(true);
 
-                // await addDataToFirestore(squadDetails);
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                await addDataToFirestore(squadDetails);
+                // await new Promise(resolve => setTimeout(resolve, 2000));
                 
                 console.log('Form submitted successfully!', squadDetails);
             } catch (error) {
