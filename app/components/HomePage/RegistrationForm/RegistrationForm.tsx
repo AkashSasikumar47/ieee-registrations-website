@@ -146,47 +146,56 @@ const RegistrationForm = () => {
     const validateForm = () => {
 
         if (!squadDetails.squadName.trim()) {
-            alert('Squad Name is required');
+            setErrorMessage('Squad Name is required');
+            setIsModalOpen(true);
             return false;
         }
 
         if (squadDetails.squadSize < 2) {
-            alert('Select the number of squad members');
+            setErrorMessage('Select the number of squad members');
+            setIsModalOpen(true);
             return false;
         }
 
         if (!squadDetails.squadMaster?.name?.trim()) {
-            alert('Squad Master name is required');
+            setErrorMessage('Squad Master name is required');
+            setIsModalOpen(true);
             return false;
         }
 
         if (!squadDetails.squadMaster?.registerNumber?.trim()) {
-            alert('Squad Master register number is required');
+            setErrorMessage('Squad Master register number is required');
+            setIsModalOpen(true);
             return false;
         }
 
         if (!/^RA\d{13}$/.test(squadDetails.squadMaster?.registerNumber?.trim())) {
-            alert('Squad Master register number should match the pattern RA followed by 14 digits');
+            setErrorMessage('Squad Master register number should match the pattern RA followed by 14 digits');
+            setIsModalOpen(true);
             return false;
         }
 
         if (!squadDetails.squadMaster?.email?.trim()) {
-            alert('Squad Master email is required');
+            setErrorMessage('Squad Master email is required');
+            setIsModalOpen(true);
             return false;
         }
 
         if (!/^[a-zA-Z0-9._-]+@srmist\.edu\.in$/.test(squadDetails.squadMaster?.email?.trim())) {
-            alert('Squad Master email should match the pattern [local-part]@srmist.edu.in');
+            setErrorMessage('Squad Master email should match the pattern [local-part]@srmist.edu.in');
+            setIsModalOpen(true);
             return false;
         }
 
         if (!squadDetails.squadMaster?.department?.trim()) {
-            alert('Squad Master department is required');
+            setErrorMessage('Squad Master department is required');
+            setIsModalOpen(true);
             return false;
         }
 
         if (!squadDetails.squadMaster?.contactNumber?.trim()) {
-            alert('Squad Master contact number is required');
+            setErrorMessage('Squad Master contact number is required');
+            setIsModalOpen(true);
             return false;
         }
 
@@ -203,32 +212,38 @@ const RegistrationForm = () => {
 
     const validateMember = (memberNo: number) => {
         if (!squadDetails[`squadMember${memberNo}`]?.name?.trim()) {
-            alert(`Squad Member ${memberNo} name is required`);
+            setErrorMessage(`Squad Member ${memberNo} name is required`);
+            setIsModalOpen(true);
             return false;
         }
 
         if (!squadDetails[`squadMember${memberNo}`]?.registerNumber?.trim()) {
-            alert(`Squad Member ${memberNo} register number is required`);
+            setErrorMessage(`Squad Member ${memberNo} register number is required`);
+            setIsModalOpen(true);
             return false;
         }
 
         if (!/^RA\d{13}$/.test(squadDetails[`squadMember${memberNo}`]?.registerNumber?.trim())) {
-            alert(`Squad Member ${memberNo} register number should match the pattern RA followed by 13 digits`);
+            setErrorMessage(`Squad Member ${memberNo} register number should match the pattern RA followed by 13 digits`);
+            setIsModalOpen(true);
             return false;
           }
 
         if (!squadDetails[`squadMember${memberNo}`]?.email?.trim()) {
-            alert(`Squad Member ${memberNo} email is required`);
+            setErrorMessage(`Squad Member ${memberNo} email is required`);
+            setIsModalOpen(true);
             return false;
         }
 
         if (!/^[a-zA-Z0-9._-]+@srmist\.edu\.in$/.test(squadDetails[`squadMember${memberNo}`]?.email?.trim())) {
-            alert(`Squad Member ${memberNo} email should match the pattern [local-part]@srmist.edu.in`);
+            setErrorMessage(`Squad Member ${memberNo} email should match the pattern [local-part]@srmist.edu.in`);
+            setIsModalOpen(true);
             return false;
           }
 
         if (!squadDetails[`squadMember${memberNo}`]?.department?.trim()) {
-            alert(`Squad Member ${memberNo} department is required`);
+            setErrorMessage(`Squad Member ${memberNo} department is required`);
+            setIsModalOpen(true);
             return false;
         }
         return true;
