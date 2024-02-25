@@ -40,6 +40,7 @@ interface SquadDetails {
         email?: string;
         department?: string;
     };
+    squadTicket?: string;
 
     [key: string]: any;
 
@@ -62,6 +63,9 @@ const RegistrationForm = () => {
                 if (squadNamesArray.includes(squadDetails.squadName)) {
                     throw new Error("Squad name already exists. Please choose a different name.");
                 }
+                const SquadCount = squadNamesArray.length;
+                const squadTicket = createUniqueTicket(squadDetails, SquadCount);
+                squadDetails.squadTicket = squadTicket;
                 await updateDoc(squadNamesDocRef, {
                     squadNames: [...squadNamesArray, squadDetails.squadName]
                 });
@@ -230,6 +234,23 @@ const RegistrationForm = () => {
         return true;
     };
 
+    function createUniqueTicket(squadDetails: SquadDetails, teamCount: number): string {
+        const { squadName, squadMaster } = squadDetails;
+    
+        const getFirstThreeLetters = (str: string) => str.slice(0, 3);
+        const getLastThreeDigits = (str: string) => str.slice(-3);
+    
+        const ticketDetails = [
+            getFirstThreeLetters(squadName),
+            squadMaster?.name ? squadMaster.name.charAt(0) : '_',
+            squadMaster?.registerNumber ? getLastThreeDigits(squadMaster.registerNumber) : '___',
+            squadMaster?.contactNumber ? getLastThreeDigits(squadMaster.contactNumber) : '___',
+            teamCount.toString(),
+        ];
+    
+        return ticketDetails.join('_');
+    }
+
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         if (validateForm()) {
@@ -277,6 +298,7 @@ const RegistrationForm = () => {
                             squadMember3={squadDetails.squadMember3?.name}
                             squadMember4={squadDetails.squadMember4?.name}
                             squadMember5={squadDetails.squadMember5?.name}
+                            squadTicket={squadDetails.squadTicket || ''}
                         /> : <div>
                             <form onSubmit={handleSubmit}>
                                 <div className="lg:max-w-lg lg:mx-auto lg:me-0 ms-auto">
