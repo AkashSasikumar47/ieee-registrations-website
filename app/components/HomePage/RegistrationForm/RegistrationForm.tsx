@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { db } from '../../../firebase_config';
 import { collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import ModalPopup from '../ModalPopup/ModalPopup';
+import Confirmation from '../Confirmation/Confirmation';
 
 
 interface SquadDetails {
@@ -49,6 +50,7 @@ const RegistrationForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [done, isDone] = useState(false);
 
     async function addDataToFirestore(squadDetails: SquadDetails) {
         try {
@@ -159,8 +161,18 @@ const RegistrationForm = () => {
             return false;
         }
 
+        if (!/^RA\d{13}$/.test(squadDetails.squadMaster?.registerNumber?.trim())) {
+            alert('Squad Master register number should match the pattern RA followed by 14 digits');
+            return false;
+        }
+
         if (!squadDetails.squadMaster?.email?.trim()) {
             alert('Squad Master email is required');
+            return false;
+        }
+
+        if (!/^[a-zA-Z0-9._-]+@srmist\.edu\.in$/.test(squadDetails.squadMaster?.email?.trim())) {
+            alert('Squad Master email should match the pattern [local-part]@srmist.edu.in');
             return false;
         }
 
@@ -196,10 +208,20 @@ const RegistrationForm = () => {
             return false;
         }
 
+        if (!/^RA\d{13}$/.test(squadDetails[`squadMember${memberNo}`]?.registerNumber?.trim())) {
+            alert(`Squad Member ${memberNo} register number should match the pattern RA followed by 13 digits`);
+            return false;
+          }
+
         if (!squadDetails[`squadMember${memberNo}`]?.email?.trim()) {
             alert(`Squad Member ${memberNo} email is required`);
             return false;
         }
+
+        if (!/^[a-zA-Z0-9._-]+@srmist\.edu\.in$/.test(squadDetails[`squadMember${memberNo}`]?.email?.trim())) {
+            alert(`Squad Member ${memberNo} email should match the pattern [local-part]@srmist.edu.in`);
+            return false;
+          }
 
         if (!squadDetails[`squadMember${memberNo}`]?.department?.trim()) {
             alert(`Squad Member ${memberNo} department is required`);
@@ -215,9 +237,9 @@ const RegistrationForm = () => {
                 setIsLoading(true);
 
                 await addDataToFirestore(squadDetails);
-                // await new Promise(resolve => setTimeout(resolve, 2000));
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 
-                console.log('Form submitted successfully!', squadDetails);
+                isDone(true);
             } catch (error) {
                 console.error('Error submitting form:', error);
                 setErrorMessage('An error occurred. Please try again.');
@@ -248,7 +270,14 @@ const RegistrationForm = () => {
                         </div>
 
                         {/* Form */}
-                        <div>
+                        { done ? <Confirmation 
+                            squadName={squadDetails.squadName}
+                            squadMaster={squadDetails.squadMaster?.name || ''}
+                            squadMember2={squadDetails.squadMember2?.name || ''}
+                            squadMember3={squadDetails.squadMember3?.name}
+                            squadMember4={squadDetails.squadMember4?.name}
+                            squadMember5={squadDetails.squadMember5?.name}
+                        /> : <div>
                             <form onSubmit={handleSubmit}>
                                 <div className="lg:max-w-lg lg:mx-auto lg:me-0 ms-auto">
                                     <div className="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-xl">
@@ -403,7 +432,7 @@ const RegistrationForm = () => {
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                        </div> }
                     </div>
                     {isModalOpen && (
                         <ModalPopup message={errorMessage} onClose={() => setIsModalOpen(false)}/>
