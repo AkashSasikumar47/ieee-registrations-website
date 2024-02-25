@@ -236,10 +236,10 @@ const RegistrationForm = () => {
             try {
                 setIsLoading(true);
 
-                await addDataToFirestore(squadDetails);
+                const status = await addDataToFirestore(squadDetails);
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 
-                isDone(true);
+                isDone(status);
             } catch (error) {
                 console.error('Error submitting form:', error);
                 setErrorMessage('An error occurred. Please try again.');
@@ -298,7 +298,7 @@ const RegistrationForm = () => {
                                                     <input
                                                         type="text"
                                                         className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-full text-sm text-black disabled:opacity-50 disabled:pointer-events-none"
-                                                        placeholder="Squad Name"
+                                                        placeholder="Squad Name (CAPS)"
                                                         value={squadDetails.squadName}
                                                         onChange={(e) => handleInputChange('squadName', e.target.value.toUpperCase())}
                                                     />

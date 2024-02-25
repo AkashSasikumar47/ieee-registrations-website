@@ -12,12 +12,12 @@ interface ConfirmationProps {
 }
 
 const Confirmation: React.FC<ConfirmationProps> = ({
-    squadName = 'Squad Name',
-    squadMaster = 'Squad Master',
-    squadMember2 = 'Squad Member 2',
-    squadMember3 = 'Squad Member 3',
-    squadMember4 = 'Squad Member 4',
-    squadMember5 = 'Squad Member 5',
+    squadName,
+    squadMaster,
+    squadMember2,
+    squadMember3,
+    squadMember4,
+    squadMember5,
   }) => {
     // Use react-spring to animate the checkmark opacity
     const { opacity } = useSpring({
