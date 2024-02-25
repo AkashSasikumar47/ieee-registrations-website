@@ -1,46 +1,63 @@
 import React from 'react'
 import { useState, ChangeEvent } from 'react';
+import { db } from '../../../firebase_config';
+import { collection, addDoc } from "firebase/firestore";
+
+
+async function addDataToFireStore(squadDetails: SquadDetails) {
+    try {
+        const docRef = await addDoc(collection(db, "squads_test"), {
+            squadDetails
+        });
+        console.log("Document written with ID: ", docRef.id);
+        return true;
+    } catch (e) {
+        console.error("Error adding document: ", e);
+        return false;
+    }
+
+}
+
+interface SquadDetails {
+    squadName: string;
+    squadSize: number;
+    squadMaster: {
+        name?: string;
+        registerNumber?: string;
+        email?: string;
+        department?: string;
+        contactNumber?: string;
+    };
+    squadMember2?: {
+        name?: string;
+        registerNumber?: string;
+        email?: string;
+        department?: string;
+    };
+    squadMember3?: {
+        name?: string;
+        registerNumber?: string;
+        email?: string;
+        department?: string;
+    };
+    squadMember4?: {
+        name?: string;
+        registerNumber?: string;
+        email?: string;
+        department?: string;
+    };
+    squadMember5?: {
+        name?: string;
+        registerNumber?: string;
+        email?: string;
+        department?: string;
+    };
+
+    [key: string]: any;
+
+}
 
 const RegistrationForm = () => {
-
-    interface SquadDetails {
-        squadName: string;
-        squadSize: number;
-        squadMaster: {
-            name?: string;
-            registerNumber?: string;
-            email?: string;
-            department?: string;
-            contactNumber?: string;
-        };
-        squadMember2?: {
-            name?: string;
-            registerNumber?: string;
-            email?: string;
-            department?: string;
-        };
-        squadMember3?: {
-            name?: string;
-            registerNumber?: string;
-            email?: string;
-            department?: string;
-        };
-        squadMember4?: {
-            name?: string;
-            registerNumber?: string;
-            email?: string;
-            department?: string;
-        };
-        squadMember5?: {
-            name?: string;
-            registerNumber?: string;
-            email?: string;
-            department?: string;
-        };
-
-        [key: string]: any;
-
-    }
 
     const [squadDetails, setSquadDetails] = useState<SquadDetails>({
         squadName: '',
@@ -140,12 +157,12 @@ const RegistrationForm = () => {
     };
 
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         handleInputChange('squadSize', selectedMembers + 1);
         console.log(squadDetails);
         if (validateForm()) {
-            // Perform form submission logic here
+            await addDataToFireStore(squadDetails);
             console.log('Form submitted successfully!', squadDetails);
         }
     };
