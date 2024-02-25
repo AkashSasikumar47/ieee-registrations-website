@@ -68,16 +68,6 @@ const RegistrationForm = () => {
     };
 
     const [selectedMembers, setSelectedMembers] = useState<number | ''>('');
-    const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        const value = event.target.value;
-        const parsedValue = value !== '' ? parseInt(value, 10) : '';
-
-        setSelectedMembers(parsedValue);
-        if (typeof parsedValue === 'number') {
-            handleInputChange('squadSize', (parsedValue + 1).toString());
-        }
-    };
-
     const validateForm = () => {
 
         if (!squadDetails.squadName.trim()) {
@@ -210,7 +200,7 @@ const RegistrationForm = () => {
                                                             type="button"
                                                             className="hs-dropdown-toggle py-3 px-5 inline-flex w-full items-center gap-x-8 xs:mb-4 lg:mb-0 border border-gray-200 hover:border-gray-300 text-sm text-gray-400 rounded-full bg-white disabled:opacity-50 disabled:pointer-events-none"
                                                         >
-                                                            Squad members (2-5)
+                                                            <span className="flex-1">{selectedMembers ? selectedMembers + 1 : 'Squad members (2-5)'}</span>
                                                             <svg
                                                                 className="hs-dropdown-open:rotate-180 size-4"
                                                                 xmlns="http://www.w3.org/2000/svg"
@@ -231,39 +221,31 @@ const RegistrationForm = () => {
                                                             aria-labelledby="hs-dropdown-default">
                                                             <a
                                                                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                                                href="#">
+                                                                href="#"
+                                                                onClick={(e) => setSelectedMembers(1)}>
                                                                 2
                                                             </a>
                                                             <a
                                                                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                                                href="#">
+                                                                href="#"
+                                                                onClick={(e) => setSelectedMembers(2)}>
                                                                 3
                                                             </a>
                                                             <a
                                                                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                                                href="#">
+                                                                href="#"
+                                                                onClick={(e) => setSelectedMembers(3)}>
                                                                 4
                                                             </a>
                                                             <a
                                                                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                                                href="#">
+                                                                href="#"
+                                                                onClick={(e) => setSelectedMembers(4)}>
                                                                 5
                                                             </a>
 
                                                         </div>
                                                     </div>
-
-                                                    <select
-                                                        className="py-3 px-5 block w-full xs:mb-4 lg:mb-0 border border-gray-200 focus:border-orange rounded-full text-sm text-grey disabled:opacity-50 disabled:pointer-events-none hover:bg-orange-500"
-                                                        onChange={handleSelectChange}
-                                                        value={selectedMembers}
-                                                    >
-                                                        <option value="" disabled selected hidden>Squad members (2-5)</option>
-                                                        <option value="1">2</option>
-                                                        <option value="2">3</option>
-                                                        <option value="3">4</option>
-                                                        <option value="4">5</option>
-                                                    </select>
 
                                                     <input
                                                         type="text"
