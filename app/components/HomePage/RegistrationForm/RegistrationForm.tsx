@@ -2,38 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { db } from '../../../firebase_config';
 import { collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+import ModalPopup from '../ModalPopup/ModalPopup';
 
-
-async function addDataToFirestore(squadDetails: SquadDetails) {
-    try {
-
-        const squadNamesDocRef = doc(collection(db, "metadata"), "squad_names");
-        const squadNamesDocSnapshot = await getDoc(squadNamesDocRef);
-        if (squadNamesDocSnapshot.exists()) {
-
-            const squadNamesArray = squadNamesDocSnapshot.data().squadNames;
-
-            if (squadNamesArray.includes(squadDetails.squadName)) {
-                throw new Error("Squad name already exists. Please choose a different name.");
-            }
-
-            await updateDoc(squadNamesDocRef, {
-                squadNames: [...squadNamesArray, squadDetails.squadName]
-            });
-        } 
-    
-
-        const docRef = await addDoc(collection(db, "squads_test"), {
-            squadDetails
-        });
-        console.log("Document written with ID: ", docRef.id);
-        return true;
-
-    } catch (e) {
-        console.error("Error adding document: ", e);
-        return false;
-    }
-}    
 
 interface SquadDetails {
     squadName: string;
@@ -75,6 +45,45 @@ interface SquadDetails {
 }
 
 const RegistrationForm = () => {
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    async function addDataToFirestore(squadDetails: SquadDetails) {
+        try {
+            const squadNamesDocRef = doc(collection(db, "metadata"), "squad_names");
+            const squadNamesDocSnapshot = await getDoc(squadNamesDocRef);
+
+            if (squadNamesDocSnapshot.exists()) {
+                const squadNamesArray = squadNamesDocSnapshot.data().squadNames;
+                if (squadNamesArray.includes(squadDetails.squadName)) {
+                    throw new Error("Squad name already exists. Please choose a different name.");
+                }
+                await updateDoc(squadNamesDocRef, {
+                    squadNames: [...squadNamesArray, squadDetails.squadName]
+                });
+            } 
+    
+            const docRef = await addDoc(collection(db, "squads_test"), {
+                squadDetails
+            });
+            console.log("Document written with ID: ", docRef.id);
+            return true;
+    
+        } catch (e) {
+            if (e instanceof Error) {
+                console.error("Error adding document: ", e);
+                setErrorMessage(e.message);
+            } else {
+                console.error("Unknown error adding document: ", e);
+                setErrorMessage("An unknown error occurred.");
+            }
+            setIsModalOpen(true);
+            return false;
+        }
+    
+    }
 
     const [squadDetails, setSquadDetails] = useState<SquadDetails>({
         squadName: '',
@@ -199,8 +208,6 @@ const RegistrationForm = () => {
         return true;
     };
 
-    const [isLoading, setIsLoading] = useState(false);
-
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         if (validateForm()) {
@@ -213,6 +220,8 @@ const RegistrationForm = () => {
                 console.log('Form submitted successfully!', squadDetails);
             } catch (error) {
                 console.error('Error submitting form:', error);
+                setErrorMessage('An error occurred. Please try again.');
+                setIsModalOpen(true);
             } finally {
                 setIsLoading(false);
             }
@@ -396,6 +405,9 @@ const RegistrationForm = () => {
                             </form>
                         </div>
                     </div>
+                    {isModalOpen && (
+                        <ModalPopup message={errorMessage} onClose={() => setIsModalOpen(false)}/>
+                    )}
                 </div>
             </div>
 
