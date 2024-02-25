@@ -319,10 +319,10 @@ const RegistrationForm = () => {
                                 <div className="lg:max-w-lg lg:mx-auto lg:me-0 ms-auto">
                                     <div className="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-xl">
                                         <div className="text-center">
-                                            <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
+                                            <h1 className="block text-2xl font-bold text-gray-800">
                                                 HackTrix-24 Registration Form
                                             </h1>
-                                            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                            <p className="mt-2 text-sm text-gray-600">
                                                 Form teams, make new friends, and collaborate with like-minded peers.
                                             </p>
                                         </div>
