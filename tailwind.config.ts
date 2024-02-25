@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        head: ['Protest Guerrilla', 'sans-serif'],
+        body: ['Quicksand', 'sans-serif'],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -17,4 +21,3 @@ const config: Config = {
   },
   plugins: [],
 };
-export default config;

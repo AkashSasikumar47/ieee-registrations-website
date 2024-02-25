@@ -43,6 +43,11 @@ const Confirmation: React.FC<ConfirmationProps> = ({
 
     return (
         <div className="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-xl text-center" ref={componentRef}>
+            {/* Header Section */}
+            <div className="mb-4">
+                <img src="/Assets/Hacktrix_Logo.svg" alt="Hackathon Logo" className="mx-auto" />
+            </div>
+
             <h1 className="block text-2xl font-bold text-gray-800">
                 Registration Successful ✅
             </h1>
@@ -62,16 +67,18 @@ const Confirmation: React.FC<ConfirmationProps> = ({
             </div>
 
             <h2 className="block text-lg font-medium text-gray-800">
-             This QR code serves as your Ticket
+                This QR code serves as your Ticket
             </h2>
 
             {/* Download button */}
             <button
-                className="w-full mt-6 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-body font-semibold rounded-lg border border-transparent bg-orange text-white transform transition-transform hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
+                className="w-full mt-6 mb-12 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-body font-semibold rounded-lg border border-transparent bg-orange text-white transform transition-transform hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
                 onClick={handleDownload}>
                 Download your Ticket
             </button>
         </div>
+
+
     );
 };
 

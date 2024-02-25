@@ -1,9 +1,5 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import PrelineScript from "./components/PrelineScript/PrelineScript";
-
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -29,8 +25,11 @@ export default function RootLayout({
         <meta property="og:image:height" content="630" />
         <meta property="og:url" content="https://registrations.ieeesrmist.com" />
 
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&family=Quicksand:wght@300,400,500,700&display=swap');
+        </style>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
       <PrelineScript />
     </html>
   );
