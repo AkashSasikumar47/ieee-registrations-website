@@ -71,7 +71,7 @@ const RegistrationForm = () => {
                 });
             } 
     
-            const docRef = await addDoc(collection(db, "squads_test"), {
+            const docRef = await addDoc(collection(db, "squads"), {
                 squadDetails
             });
             console.log("Document written with ID: ", docRef.id);
