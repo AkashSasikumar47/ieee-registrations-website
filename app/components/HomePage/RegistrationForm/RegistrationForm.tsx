@@ -1,22 +1,39 @@
 import React from 'react'
-import { useState, ChangeEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { db } from '../../../firebase_config';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 
 
-async function addDataToFireStore(squadDetails: SquadDetails) {
+async function addDataToFirestore(squadDetails: SquadDetails) {
     try {
+
+        const squadNamesDocRef = doc(collection(db, "metadata"), "squad_names");
+        const squadNamesDocSnapshot = await getDoc(squadNamesDocRef);
+        if (squadNamesDocSnapshot.exists()) {
+
+            const squadNamesArray = squadNamesDocSnapshot.data().squadNames;
+
+            if (squadNamesArray.includes(squadDetails.squadName)) {
+                throw new Error("Squad name already exists. Please choose a different name.");
+            }
+
+            await updateDoc(squadNamesDocRef, {
+                squadNames: [...squadNamesArray, squadDetails.squadName]
+            });
+        } 
+    
+
         const docRef = await addDoc(collection(db, "squads_test"), {
             squadDetails
         });
         console.log("Document written with ID: ", docRef.id);
         return true;
+
     } catch (e) {
         console.error("Error adding document: ", e);
         return false;
     }
-
-}
+}    
 
 interface SquadDetails {
     squadName: string;
@@ -85,6 +102,32 @@ const RegistrationForm = () => {
     };
 
     const [selectedMembers, setSelectedMembers] = useState<number>(0);
+    const setMembersNo = (no: number) => {
+        setSelectedMembers(no);
+        handleInputChange('squadSize', no + 1);
+    };
+    useEffect(() => {
+        if (selectedMembers + 1 === 2) {
+            setSquadDetails((prev) => ({
+                ...prev,
+                squadMember3: {},
+                squadMember4: {},
+                squadMember5: {},
+            }));
+        } else if (selectedMembers + 1 === 3) {
+            setSquadDetails((prev) => ({
+                ...prev,
+                squadMember4: {},
+                squadMember5: {},
+            }));
+        } else if (selectedMembers + 1 === 4) {
+            setSquadDetails((prev) => ({
+                ...prev,
+                squadMember5: {},
+            }));
+        }
+    }, [selectedMembers]);
+    
     const validateForm = () => {
 
         if (!squadDetails.squadName.trim()) {
@@ -156,14 +199,23 @@ const RegistrationForm = () => {
         return true;
     };
 
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        handleInputChange('squadSize', selectedMembers + 1);
-        console.log(squadDetails);
         if (validateForm()) {
-            await addDataToFireStore(squadDetails);
-            console.log('Form submitted successfully!', squadDetails);
+            try {
+                setIsLoading(true);
+
+                // await addDataToFirestore(squadDetails);
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                console.log('Form submitted successfully!', squadDetails);
+            } catch (error) {
+                console.error('Error submitting form:', error);
+            } finally {
+                setIsLoading(false);
+            }
         }
     };
 
@@ -241,25 +293,25 @@ const RegistrationForm = () => {
                                                             <a
                                                                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                                 href="#"
-                                                                onClick={(e) => setSelectedMembers(1)}>
+                                                                onClick={(e) => setMembersNo(1)}>
                                                                 2
                                                             </a>
                                                             <a
                                                                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                                 href="#"
-                                                                onClick={(e) => setSelectedMembers(2)}>
+                                                                onClick={(e) => setMembersNo(2)}>
                                                                 3
                                                             </a>
                                                             <a
                                                                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                                 href="#"
-                                                                onClick={(e) => setSelectedMembers(3)}>
+                                                                onClick={(e) => setMembersNo(3)}>
                                                                 4
                                                             </a>
                                                             <a
                                                                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-full text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                                 href="#"
-                                                                onClick={(e) => setSelectedMembers(4)}>
+                                                                onClick={(e) => setMembersNo(4)}>
                                                                 5
                                                             </a>
 
@@ -323,8 +375,18 @@ const RegistrationForm = () => {
 
                                             {/* Register Button */}
                                             <div className="mt-6">
-                                                <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-body font-semibold rounded-lg border border-transparent bg-orange text-white transform transition-transform hover:scale-105 disabled:opacity-50 disabled:pointer-events-none">
-                                                    REGISTER
+                                                <button
+                                                    type="submit"
+                                                    className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-body font-semibold rounded-lg border border-transparent bg-orange text-white transform transition-transform hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
+                                                    disabled={isLoading}
+                                                >
+                                                    {isLoading ? (
+                                                        <div className="flex items-center">
+                                                            <span className="animate-spin mr-2">&#10227;</span> Loading
+                                                        </div>
+                                                    ) : (
+                                                        'REGISTER'
+                                                    )}
                                                 </button>
                                             </div>
 
