@@ -5,7 +5,7 @@ const RegistrationForm = () => {
 
     interface SquadDetails {
         squadName: string;
-        squadSize: string;
+        squadSize: number;
         squadMaster: {
             name?: string;
             registerNumber?: string;
@@ -44,7 +44,7 @@ const RegistrationForm = () => {
 
     const [squadDetails, setSquadDetails] = useState<SquadDetails>({
         squadName: '',
-        squadSize: '',
+        squadSize: 0,
         squadMaster: {},
         squadMember2: {},
         squadMember3: {},
@@ -67,7 +67,7 @@ const RegistrationForm = () => {
         }));
     };
 
-    const [selectedMembers, setSelectedMembers] = useState<number | ''>('');
+    const [selectedMembers, setSelectedMembers] = useState<number>(0);
     const validateForm = () => {
 
         if (!squadDetails.squadName.trim()) {
@@ -75,7 +75,7 @@ const RegistrationForm = () => {
             return false;
         }
 
-        if (!squadDetails.squadSize.trim()) {
+        if (squadDetails.squadSize < 2) {
             alert('Select the number of squad members');
             return false;
         }
@@ -142,6 +142,8 @@ const RegistrationForm = () => {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+        handleInputChange('squadSize', selectedMembers + 1);
+        console.log(squadDetails);
         if (validateForm()) {
             // Perform form submission logic here
             console.log('Form submitted successfully!', squadDetails);
