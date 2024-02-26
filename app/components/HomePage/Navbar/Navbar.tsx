@@ -5,7 +5,7 @@ const Navbar = () => {
         <div>
             <header className="flex justify-between items-center bg-white text-sm py-4 px-6">
                 {/* Logo */}
-                <a href="hacktrix.ieeesrmist.com" className="flex-none hover:scale-105">
+                <a href="https://hacktrix.ieeesrmist.com" className="flex-none hover:scale-105">
                     <img src="/Assets/Hacktrix_Logo.svg" alt="Hacktrix-Logo" className="w-36 h-16" />
                 </a>
 
