@@ -5,6 +5,7 @@ import Head from 'next/head';
 
 import Navbar from './components/HomePage/Navbar/Navbar';
 import RegistrationForm from './components/HomePage/RegistrationForm/RegistrationForm';
+import RegistrationClose from './components/HomePage/RegistrationClose/RegistrationClose';
 import Footer from './components/HomePage/Footer/Footer';
 
 import '../app/globals.css';
@@ -27,7 +28,7 @@ const HomePage: React.FC = () => {
       </Head>
 
       <Navbar />
-      <RegistrationForm />
+      <RegistrationClose />
       <Footer />
     </div>
   );
