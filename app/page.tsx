@@ -28,7 +28,7 @@ const HomePage: React.FC = () => {
       </Head>
 
       <Navbar />
-      <RegistrationForm />
+      <RegistrationClose />
       <Footer />
     </div>
   );
