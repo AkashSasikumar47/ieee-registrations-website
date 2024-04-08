@@ -4,15 +4,15 @@ import React from 'react';
 import Head from 'next/head';
 
 import Navbar from './components/HomePage/Navbar/Navbar';
-import RegistrationForm from './components/HomePage/RegistrationForm/RegistrationForm';
-import RegistrationClose from './components/HomePage/RegistrationClose/RegistrationClose';
+import Hero from './components/HomePage/Hero/Hero';
+import Register from './components/HomePage/Register/Register';
 import Footer from './components/HomePage/Footer/Footer';
 
 import '../app/globals.css';
 
 const HomePage: React.FC = () => {
   return (
-    <div>
+    <div className="bg-gray-100">
       <Head>
         <title>Registrations | IEEE SRM</title>
         <meta name="description" content="Unlock Exclusive Access to Exciting Events and Workshops" />
@@ -28,7 +28,8 @@ const HomePage: React.FC = () => {
       </Head>
 
       <Navbar />
-      <RegistrationForm />
+      <Hero />
+      <Register />
       <Footer />
     </div>
   );

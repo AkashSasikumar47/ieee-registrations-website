@@ -1,39 +1,36 @@
-import React from 'react';
+import React from 'react'
 
 const Footer = () => {
     return (
-
-        <footer className="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto bg-white text-black font-body">
-            <div className="text-center">
-
+        <footer className="max-w-screen-xl mx-auto px-4 py-6 md:px-8 md:py-10">
+            <div className="text-center flex flex-col items-center">
                 <div>
                     <a
-                        className="flex items-center justify-center"
-                        href="hacktrix.ieeesrmist.com"
+                        className="flex-none text-sm font-head font-extrabold text-orange"
+                        href="https://www.ieeesrmist.com/"
                         aria-label="Brand"
                     >
-                        <img src="/Assets/Hacktrix_Logo.svg" alt="Hacktrix-Logo" className="w-36 h-16" />
+                        <img src="/assets/IEEE/Logo/IEEE SRM SB.png" alt="IEEE SRM SB" className="w-36 h-16" />
                     </a>
                 </div>
 
                 <div className="mt-3">
-                    <p className="text-black font-body">
+                    <p className="mb-2 font-sans font-base text-base sm:text-lg">
                         We're part of the{' '}
                         <a
-                            className="font-semibold text-orange hover:text-lightOrange"
+                            className="font-sans font-bold text-base sm:text-lg hover:text-blue-800"
                             href="https://www.ieee.org/"
                         >
                             IEEE
                         </a>{' '}
                         family.
                     </p>
-                    <p className="text-black font-semibold">© 2024 IEEE SRM. All rights reserved.</p>
+                    <p className="font-sans font-base text-xs sm:text-base">© 2024 IEEE SRM. All rights reserved.</p>
                 </div>
 
             </div>
         </footer>
+    )
+}
 
-    );
-};
-
-export default Footer;
+export default Footer

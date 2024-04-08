@@ -2,18 +2,15 @@ import React from 'react';
 
 const Navbar = () => {
     return (
-        <div>
-            <header className="flex justify-between items-center bg-white text-sm py-4 px-6">
-                {/* Logo */}
-                <a href="https://hacktrix.ieeesrmist.com" className="flex-none hover:scale-105">
-                    <img src="/Assets/Hacktrix_Logo.svg" alt="Hacktrix-Logo" className="w-36 h-16" />
+        <div className="max-w-screen-xl mx-auto px-4 py-4 md:px-8 md:py-4">
+            <div className="mx-auto flex items-center justify-between">
+                <a href="/" className="inline-flex items-center gap-2.5 text-2xl font-bold text-blue-800 md:text-3xl" aria-label="logo">
+                    IEEE SRM
                 </a>
-
-                {/* IEEE Logo */}
-                <a href="#" className="flex-none">
-                    <img src="/Assets/IEEE_Logo.png" alt="ieee-srm" className="w-36 h-14" />
+                <a href="https://www.ieeesrmist.com/" className="inline-flex items-center gap-2.5 text-2xl font-bold text-black md:text-3xl" aria-label="logo">
+                    <img src="/assets/Protocol/Logo/IEEE SRM SB.png" alt="IEEE SRM SB Logo" className="h-8 md:h-12" />
                 </a>
-            </header>
+            </div>
         </div>
     );
 };
