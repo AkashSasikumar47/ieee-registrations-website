@@ -6,8 +6,8 @@ interface TeamMember {
     name: string;
     registerNumber: string;
     email: string;
-    department: string;
-    contactNumber: string;
+    department?: string;
+    contactNumber?: string;
 }
 
 interface ConfirmationProps {
@@ -41,45 +41,46 @@ const Confirmation: React.FC<ConfirmationProps> = ({
     };
 
     return (
-        <div className="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-xl text-center" ref={componentRef}>
-            {/* Header Section */}
-            <div className="mb-4">
-                <img src="/Assets/Hacktrix_Logo.svg" alt="Hackathon Logo" className="mx-auto" />
-            </div>
-
-            <h1 className="block text-2xl font-bold text-gray-800">
-                Registration Successful ✅
-            </h1>
-            {/* Display team details */}
-            <div className="mb-6 mt-2 text-normal font-semibold text-gray-600">
-                <p className="mb-2">Team Name: {teamName}</p>
-                {/* Display team member 1 details */}
-                <div className="mb-4">
-                    <p>Team Member 1: {teamMember1.name}</p>
-                    <p>Registration Number: {teamMember1.registerNumber}</p>
-                    <p>Email: {teamMember1.email}</p>
-                    <p>Department: {teamMember1.department}</p>
-                    <p>Contact Number: {teamMember1.contactNumber}</p>
-                </div>
-                {/* Display team member 2 details if provided */}
-                {teamMember2 && (
-                    <div className="mb-4">
-                        <p>Team Member 2: {teamMember2.name}</p>
-                        <p>Registration Number: {teamMember2.registerNumber}</p>
-                        <p>Email: {teamMember2.email}</p>
-                        <p>Department: {teamMember2.department}</p>
-                        <p>Contact Number: {teamMember2.contactNumber}</p>
+        <div className="bg-white max-w-screen-xl mx-auto px-4 py-4 md:px-8 md:py-4">
+            <div className="grid sm:gap-8 lg:grid-cols-2 py-6">
+                <div className="flex flex-col justify-center mx-auto mb-10">
+                    <h3 className="mb-2 sm:mb-4 font-sans font-semibold text-blue-800 text-xs lg:text-normal">
+                        CONFIRMATION
+                    </h3>
+                    <h2 className="mb-4 md:mb-6 font-sans font-bold text-black text-2xl sm:text-4xl">
+                        Registration Confirmation
+                    </h2>
+                    <div ref={componentRef} className="mb-4 md:mb-6">
+                        <h4 className="font-sans font-semibold text-lg mb-2">Team Details:</h4>
+                        <p className="font-sans text-gray-600">
+                            <span className="font-semibold">Team Name:</span> {teamName}<br />
+                            <span className="font-semibold">Team Member 1:</span> {teamMember1.name}, {teamMember1.registerNumber}, {teamMember1.email}<br />
+                            {teamMember2 && (
+                                <>
+                                    <span className="font-semibold">Team Member 2:</span> {teamMember2.name}, {teamMember2.registerNumber}, {teamMember2.email}
+                                </>
+                            )}
+                        </p>
                     </div>
-                )}
+                    <p className="max-w-2xl mx-auto font-sans font-base text-gray-400 text-xs sm:text-base text-justify">
+                        We have received your registration details, and you are now officially signed up for the hackathon. Get ready to embark on an exciting journey of innovation and collaboration with fellow participants.
+                    </p>
+                    <a
+                        href="https://registrations.ieeesrmist.com"
+                        className="mt-4 md:mt-6 inline-block text-blue-500 underline text-sm font-semibold hover:text-blue-700 md:text-base"
+                    >
+                        Go to Home
+                    </a>
+                </div>
+                <div className="relative aspect-square overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto">
+                    <img
+                        src="/assets/Protocol/img/Registration_Confirmed.png"
+                        loading="lazy"
+                        alt="Protocol"
+                        className="absolute inset-0 aspect-square h-full w-full object-cover object-center"
+                    />
+                </div>
             </div>
-
-            {/* Download button */}
-            <button
-                className="w-full mt-6 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-body font-semibold rounded-lg border border-transparent bg-orange text-white transform transition-transform hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
-                onClick={handleDownload}
-            >
-                Download your Ticket
-            </button>
         </div>
     );
 };
