@@ -1,8 +1,21 @@
-import React from 'react'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const Footer = () => {
+    const [ref, inView] = useInView({
+        triggerOnce: true,
+        threshold: 0.5,
+    });
+
     return (
-        <footer className="max-w-screen-xl mx-auto px-4 py-6 md:px-8 md:py-10">
+        <motion.footer
+            ref={ref}
+            className="max-w-screen-xl mx-auto px-4 py-6 md:px-8 md:py-10"
+            initial={{ opacity: 0, y: 50 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1 }}
+        >
             <div className="text-center flex flex-col items-center">
                 <div>
                     <a
@@ -27,10 +40,9 @@ const Footer = () => {
                     </p>
                     <p className="font-sans font-base text-xs sm:text-base">© 2024 IEEE SRM. All rights reserved.</p>
                 </div>
-
             </div>
-        </footer>
-    )
-}
+        </motion.footer>
+    );
+};
 
-export default Footer
+export default Footer;

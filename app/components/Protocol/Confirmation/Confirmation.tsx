@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 interface TeamMember {
     name?: string;
@@ -19,9 +20,13 @@ const Confirmation: React.FC<ConfirmationProps> = ({
     teamMember1,
     teamMember2,
 }) => {
-
     return (
-        <div className="bg-white max-w-screen-xl mx-auto px-4 py-4 md:px-8 md:py-4">
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="bg-white max-w-screen-xl mx-auto px-4 py-4 md:px-8 md:py-4"
+        >
             <div className="grid sm:gap-8 lg:grid-cols-2 py-6">
                 <div className="flex flex-col justify-center mx-auto mb-10">
                     <h3 className="mb-2 sm:mb-4 font-sans font-semibold text-blue-800 text-xs lg:text-normal">
@@ -61,7 +66,7 @@ const Confirmation: React.FC<ConfirmationProps> = ({
                     />
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
