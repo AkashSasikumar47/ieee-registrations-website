@@ -1,23 +1,22 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import ModalPopup from '../ModalPopup/ModalPopup';
+import { db } from '../../../firebase_config';
+import { collection, setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+
+interface TeamMember {
+    name?: string;
+    registerNumber?: string;
+    email?: string;
+    department?: string;
+    contactNumber?: string;
+}
 
 interface TeamDetails {
     teamName: string;
     teamSize: number;
-    teamMember1: {
-        name?: string;
-        registerNumber?: string;
-        email?: string;
-        department?: string;
-        contactNumber?: string;
-    };
-    teamMember2?: {
-        name?: string;
-        registerNumber?: string;
-        email?: string;
-        department?: string;
-    };
+    teamMember1: TeamMember;
+    teamMember2?: TeamMember;
     
     teamTicket?: string;
 
@@ -31,43 +30,44 @@ const RegistrationForm = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [done, isDone] = useState(false);
 
-    // async function addDataToFirestore(teamDetails: teamDetails) {
-    //     try {
-    //         const teamNamesDocRef = doc(collection(db, "metadata"), "team_names");
-    //         const teamNamesDocSnapshot = await getDoc(teamNamesDocRef);
+    async function registerTeam(teamDetails: TeamDetails) {
+        try {
+            const teamNamesDocRef = doc(collection(db, "metadata_2024"), "protocol_1_team_names");
+            const teamNamesDocSnapshot = await getDoc(teamNamesDocRef);
+            let teamCount: number;
 
-    //         if (teamNamesDocSnapshot.exists()) {
-    //             const teamNamesArray = teamNamesDocSnapshot.data().teamNames;
-    //             if (teamNamesArray.includes(teamDetails.teamName)) {
-    //                 throw new Error("team name already exists. Please choose a different name.");
-    //             }
-    //             const teamCount = teamNamesArray.length;
-    //             const teamTicket = createUniqueTicket(teamDetails, teamCount);
-    //             teamDetails.teamTicket = teamTicket;
-    //             await updateDoc(teamNamesDocRef, {
-    //                 teamNames: [...teamNamesArray, teamDetails.teamName]
-    //             });
-    //         } 
+            if (teamNamesDocSnapshot.exists()) {
+                const teamNamesArray = teamNamesDocSnapshot.data().teamNames;
+                if (teamNamesArray.includes(teamDetails.teamName)) {
+                    throw new Error("Team name already exists. Please choose a different name.");
+                }
+                teamCount = teamNamesArray.length;
+                // await updateDoc(teamNamesDocRef, {
+                //     teamNames: [...teamNamesArray, teamDetails.teamName]
+                // });
+            } else {
+                throw new Error("Connot get Team document. Try again later.");
+            }
+            
+            const teamDocName = `${teamCount.toString()}-${teamDetails.teamName}`;
+            const teamDocRef = doc(db, 'protocol_1', teamDocName);
+            // await setDoc(teamDocRef, { teamDetails });
+            console.log("Document written with ID: ", teamDocName);
+            return true;
     
-    //         const docRef = await addDoc(collection(db, "teams"), {
-    //             teamDetails
-    //         });
-    //         console.log("Document written with ID: ", docRef.id);
-    //         return true;
+        } catch (e) {
+            if (e instanceof Error) {
+                console.error("Error adding document: ", e);
+                setErrorMessage(e.message);
+            } else {
+                console.error("Unknown error adding document: ", e);
+                setErrorMessage("An unknown error occurred.");
+            }
+            setIsModalOpen(true);
+            return false;
+        }
     
-    //     } catch (e) {
-    //         if (e instanceof Error) {
-    //             console.error("Error adding document: ", e);
-    //             setErrorMessage(e.message);
-    //         } else {
-    //             console.error("Unknown error adding document: ", e);
-    //             setErrorMessage("An unknown error occurred.");
-    //         }
-    //         setIsModalOpen(true);
-    //         return false;
-    //     }
-    
-    // }
+    }
 
     const [teamDetails, setTeamDetails] = useState<TeamDetails>({
         teamName: '',
@@ -106,87 +106,92 @@ const RegistrationForm = () => {
     }, [selectedMembers]);
 
     const validateForm = () => {
-
         console.log(teamDetails);
-
+      
         if (!teamDetails.teamName.trim()) {
-            setErrorMessage('team Name is required');
-            setIsModalOpen(true);
-            return false;
+          setErrorMessage('Team Name is required');
+          setIsModalOpen(true);
+          return false;
         }
-
+      
         if (teamDetails.teamSize < 1) {
-            setErrorMessage('Select the number of team members');
-            setIsModalOpen(true);
+          setErrorMessage('Select the number of team members');
+          setIsModalOpen(true);
+          return false;
+        }
+      
+        // if (!validateContactNumber(teamDetails.teamMember1?.contactNumber)) {
+        //   return false;
+        // }
+
+        if (!validateMember(teamDetails['teamMember1'], 1)) {
             return false;
         }
+      
+        if (teamDetails.teamSize === 2 && !validateMember(teamDetails['teamMember2'], 2)) {
+          return false;
+        }
+      
+        return true;
+      };
+      
+      const validateMember = (member: TeamMember | undefined, memberNo: number) => {
+        if (!member?.name?.trim()) {
+            console.log(member);
+          setErrorMessage(`Team Member ${memberNo} name is required`);
+          setIsModalOpen(true);
+          return false;
+        }
+      
+        if (!member?.registerNumber?.trim()) {
+          setErrorMessage(`Team Member ${memberNo} register number is required`);
+          setIsModalOpen(true);
+          return false;
+        }
+      
+        if (!/^RA\d{13}$/.test(member?.registerNumber?.trim())) {
+          setErrorMessage(`Team Member ${memberNo} register number should match the pattern RA followed by 13 digits`);
+          setIsModalOpen(true);
+          return false;
+        }
+      
+        if (!member?.email?.trim()) {
+          setErrorMessage(`Team Member ${memberNo} email is required`);
+          setIsModalOpen(true);
+          return false;
+        }
+      
+        if (!/^[a-zA-Z0-9._-]+@srmist\.edu\.in$/.test(member?.email?.trim())) {
+          setErrorMessage(`Team Member ${memberNo} email should match the pattern [local-part]@srmist.edu.in`);
+          setIsModalOpen(true);
+          return false;
+        }
+      
+        if (memberNo == 1 && !member?.department?.trim()) {
+          setErrorMessage(`Team Member ${memberNo} department is required`);
+          setIsModalOpen(true);
+          return false;
+        }
 
-        if (!teamDetails.teamMember1?.contactNumber || teamDetails.teamMember1.contactNumber.trim().length !== 10) {
+        if (memberNo == 1 && (!member?.contactNumber || member?.contactNumber.trim().length !== 10)) {
             setErrorMessage('Team Member 1 contact number must be exactly 10 digits');
             setIsModalOpen(true);
             return false;
         }
-
-        if (selectedMembers) {
-            for (let i = 1; i <= selectedMembers + 1; i++) {
-                if (!validateMember(i)) {
-                    return false;
-                }
-            }
-        }
-
+      
         return true;
     };
-
-    const validateMember = (memberNo: number) => {
-        if (!teamDetails[`teamMember${memberNo}`]?.name?.trim()) {
-            setErrorMessage(`team Member ${memberNo} name is required`);
-            setIsModalOpen(true);
-            return false;
-        }
-
-        if (!teamDetails[`teamMember${memberNo}`]?.registerNumber?.trim()) {
-            setErrorMessage(`team Member ${memberNo} register number is required`);
-            setIsModalOpen(true);
-            return false;
-        }
-
-        if (!/^RA\d{13}$/.test(teamDetails[`teamMember${memberNo}`]?.registerNumber?.trim())) {
-            setErrorMessage(`team Member ${memberNo} register number should match the pattern RA followed by 13 digits`);
-            setIsModalOpen(true);
-            return false;
-          }
-
-        if (!teamDetails[`teamMember${memberNo}`]?.email?.trim()) {
-            setErrorMessage(`team Member ${memberNo} email is required`);
-            setIsModalOpen(true);
-            return false;
-        }
-
-        if (!/^[a-zA-Z0-9._-]+@srmist\.edu\.in$/.test(teamDetails[`teamMember${memberNo}`]?.email?.trim())) {
-            setErrorMessage(`team Member ${memberNo} email should match the pattern [local-part]@srmist.edu.in`);
-            setIsModalOpen(true);
-            return false;
-          }
-
-        if (!teamDetails[`teamMember${memberNo}`]?.department?.trim()) {
-            setErrorMessage(`team Member ${memberNo} department is required`);
-            setIsModalOpen(true);
-            return false;
-        }
-        return true;
-    };     
-
+      
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         if (validateForm()) {
             try {
                 setIsLoading(true);
 
-                // const status = await addDataToFirestore(squadDetails);
-                await new Promise(resolve => setTimeout(resolve, 3000));
+                const status = await registerTeam(teamDetails);
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 
-                // isDone(status);
+                isDone(status);
             } catch (error) {
                 console.error('Error submitting form:', error);
                 setErrorMessage('An error occurred. Please try again.');
@@ -230,7 +235,7 @@ const RegistrationForm = () => {
                     <input value={teamDetails.teamMember1.contactNumber} onChange={(e) => handleInputChange('teamMember1', { ...teamDetails.teamMember1, contactNumber: e.target.value})} type="tel" name="contact-number" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                 </div>
                 <div>
-                    <label htmlFor="department" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Department</label>
+                    <label htmlFor="department" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Department*</label>
                     <input value={teamDetails.teamMember1.department} onChange={(e) => handleInputChange('teamMember1', { ...teamDetails.teamMember1, department: e.target.value})} name="department" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                 </div>
                 <div className="sm:col-span-2">
@@ -239,15 +244,15 @@ const RegistrationForm = () => {
                 </div>
                 <div>
                     <label htmlFor="member2-name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Second Member's Name</label>
-                    <input value={teamDetails.teamMember2?.name || ''} onChange={(e) => handleInputChange('teamMember1', { ...teamDetails.teamMember2, name: e.target.value})} name="member2-name" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+                    <input value={teamDetails.teamMember2?.name} onChange={(e) => handleInputChange('teamMember2', { ...teamDetails.teamMember2, name: e.target.value})} name="member2-name" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                 </div>
                 <div>
                     <label htmlFor="member2-registration-no" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Second Member's Registration No</label>
-                    <input value={teamDetails.teamMember2?.registerNumber || ''} onChange={(e) => handleInputChange('teamMember1', { ...teamDetails.teamMember2, registerNumber: e.target.value})} name="member2-registration-no" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+                    <input value={teamDetails.teamMember2?.registerNumber || ''} onChange={(e) => handleInputChange('teamMember2', { ...teamDetails.teamMember2, registerNumber: e.target.value})} name="member2-registration-no" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                 </div>
                 <div className="sm:col-span-2">
                     <label htmlFor="member2-srm-email" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Second Member's SRM Email ID</label>
-                    <input value={teamDetails.teamMember2?.email || ''} onChange={(e) => handleInputChange('teamMember1', { ...teamDetails.teamMember2, email: e.target.value})} type="email" name="member2-srm-email" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+                    <input value={teamDetails.teamMember2?.email || ''} onChange={(e) => handleInputChange('teamMember2', { ...teamDetails.teamMember2, email: e.target.value})} type="email" name="member2-srm-email" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                 </div>
             </form>
             <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:justify-center mt-12">
