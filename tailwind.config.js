@@ -4,16 +4,13 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-
+    // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    './node_modules/preline/preline.js',
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
-        head: ['Protest Guerrilla', 'sans-serif'],
-        body: ['Quicksand', 'sans-serif'],
+        sans: ['Montserrat', 'sans-serif'],
       },
       fontSize: {
         xs: '0.75rem',
@@ -30,23 +27,28 @@ module.exports = {
         '8xl': '6rem',
         '9xl': '8rem',
       },
+      fontWeight: {
+        normal: '400',
+        medium: '500',
+        semibold: '600',
+        bold: '700',
+      },
       colors: {
         white: '#ffffff',
-        orange: '#F54703',
-        lightOrange: '#FF7518',
-        darkGray: '#2F2F2F',
-        lightGray: '#464545',
-        lightBlack: '#1B1B1B',
         black: '#000000',
       },
       spacing: {
-        '8xl': '96rem',
-        '9xl': '128rem',
-        '128': '32rem',
-        '144': '36rem',
+        xl: '0.75rem',
+        '2xl': '1rem',
+        '3xl': '1.5rem',
+        '4xl': '2rem',
+        '5xl': '2.5rem',
+        '6xl': '3rem',
+        '7xl': '4rem',
+        '8xl': '6rem',
       },
       borderRadius: {
-        'xl': '0.75rem',
+        xl: '0.75rem',
         '2xl': '1rem',
         '3xl': '1.5rem',
         '4xl': '2rem',
@@ -60,10 +62,12 @@ module.exports = {
         md: '768px',
         lg: '1024px',
         xl: '1280px',
+        '2xl': '1536px',
       },
     },
   },
-  plugins: [
-    require('preline/plugin'),
-  ],
+  variants: {
+    extend: {},
+  },
+  plugins: [],
 }

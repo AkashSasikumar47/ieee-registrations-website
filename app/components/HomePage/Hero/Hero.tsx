@@ -10,8 +10,8 @@ const Hero = () => {
                     alt="IEEE SRM SB"
                     className="absolute inset-0 h-full w-full object-cover object-center"
                 />
-                <div className="relative flex flex-col items-center p-6 sm:max-w-xl">
-                    <h1 className="mb-4 text-center text-4xl font-bold text-white sm:text-5xl md:mb-12 md:text-6xl">
+                <div className="relative flex flex-col items-center lg:p-16">
+                    <h1 className="mb-4 md:mb-12 font-sans font-bold text-white text-center text-4xl sm:text-5xl md:text-6xl">
                         Innovate. Edify. Experience. Excel
                     </h1>
                     <div className="animate-bounce text-white">

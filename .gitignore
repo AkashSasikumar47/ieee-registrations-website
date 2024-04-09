@@ -12,6 +12,7 @@
 # next.js
 /.next/
 /out/
+tailwind.config.js
 
 # production
 /build
