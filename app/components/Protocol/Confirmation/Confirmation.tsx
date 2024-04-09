@@ -1,6 +1,4 @@
-import React, { useRef } from 'react';
-import { useSpring } from 'react-spring';
-import html2canvas from 'html2canvas';
+import React from 'react';
 
 interface TeamMember {
     name?: string;
@@ -21,24 +19,6 @@ const Confirmation: React.FC<ConfirmationProps> = ({
     teamMember1,
     teamMember2,
 }) => {
-    const { opacity } = useSpring({
-        from: { opacity: 0 },
-        to: { opacity: 1 },
-        config: { duration: 1000 },
-    });
-
-    const componentRef = useRef<HTMLDivElement>(null);
-
-    const handleDownload = async () => {
-        if (componentRef.current) {
-            const canvas = await html2canvas(componentRef.current);
-            const imgData = canvas.toDataURL('image/png');
-            const a = document.createElement('a');
-            a.href = imgData;
-            a.download = 'confirmation.png';
-            a.click();
-        }
-    };
 
     return (
         <div className="bg-white max-w-screen-xl mx-auto px-4 py-4 md:px-8 md:py-4">
@@ -50,7 +30,7 @@ const Confirmation: React.FC<ConfirmationProps> = ({
                     <h2 className="mb-4 md:mb-6 font-sans font-bold text-black text-2xl sm:text-4xl">
                         Registration Confirmation
                     </h2>
-                    <div ref={componentRef} className="mb-4 md:mb-6">
+                    <div className="mb-4 md:mb-6">
                         <h4 className="font-sans font-semibold text-lg mb-2">Team Details:</h4>
                         <p className="font-sans text-gray-600">
                             <span className="font-semibold">Team Name:</span> {teamName}<br />
@@ -66,7 +46,7 @@ const Confirmation: React.FC<ConfirmationProps> = ({
                         We have received your registration details, and you are now officially signed up for the hackathon. Get ready to embark on an exciting journey of innovation and collaboration with fellow participants.
                     </p>
                     <a
-                        href="https://registrations.ieeesrmist.com"
+                        href="/"
                         className="mt-4 md:mt-6 inline-block text-blue-500 underline text-sm font-semibold hover:text-blue-700 md:text-base"
                     >
                         Go to Home
