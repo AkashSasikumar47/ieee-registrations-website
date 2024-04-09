@@ -12,14 +12,14 @@ interface TeamMember {
 
 interface ConfirmationProps {
     teamName: string;
-    teamLeader: string;
-    teamMembers: TeamMember[];
+    teamMember1: TeamMember;
+    teamMember2?: TeamMember;
 }
 
 const Confirmation: React.FC<ConfirmationProps> = ({
     teamName,
-    teamLeader,
-    teamMembers,
+    teamMember1,
+    teamMember2,
 }) => {
     const { opacity } = useSpring({
         from: { opacity: 0 },
@@ -53,22 +53,29 @@ const Confirmation: React.FC<ConfirmationProps> = ({
             {/* Display team details */}
             <div className="mb-6 mt-2 text-normal font-semibold text-gray-600">
                 <p className="mb-2">Team Name: {teamName}</p>
-                <p className="mb-2">Team Leader: {teamLeader}</p>
-                {/* Display team members */}
-                {teamMembers.map((member, index) => (
-                    <div key={index} className="mb-2">
-                        <p>{`Team Member ${index + 1}: ${member.name}`}</p>
-                        <p>{`Registration Number: ${member.registerNumber}`}</p>
-                        <p>{`Email: ${member.email}`}</p>
-                        <p>{`Department: ${member.department}`}</p>
-                        <p>{`Contact Number: ${member.contactNumber}`}</p>
+                {/* Display team member 1 details */}
+                <div className="mb-4">
+                    <p>Team Member 1: {teamMember1.name}</p>
+                    <p>Registration Number: {teamMember1.registerNumber}</p>
+                    <p>Email: {teamMember1.email}</p>
+                    <p>Department: {teamMember1.department}</p>
+                    <p>Contact Number: {teamMember1.contactNumber}</p>
+                </div>
+                {/* Display team member 2 details if provided */}
+                {teamMember2 && (
+                    <div className="mb-4">
+                        <p>Team Member 2: {teamMember2.name}</p>
+                        <p>Registration Number: {teamMember2.registerNumber}</p>
+                        <p>Email: {teamMember2.email}</p>
+                        <p>Department: {teamMember2.department}</p>
+                        <p>Contact Number: {teamMember2.contactNumber}</p>
                     </div>
-                ))}
+                )}
             </div>
 
             {/* Download button */}
             <button
-                className="w-full mt-6 mb-12 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-body font-semibold rounded-lg border border-transparent bg-orange text-white transform transition-transform hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
+                className="w-full mt-6 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-body font-semibold rounded-lg border border-transparent bg-orange text-white transform transition-transform hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
                 onClick={handleDownload}
             >
                 Download your Ticket
