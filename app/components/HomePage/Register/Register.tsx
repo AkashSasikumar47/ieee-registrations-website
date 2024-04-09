@@ -14,7 +14,7 @@ const Register = () => {
                     Explore our exciting lineup of events designed to foster innovation, learning, and collaboration within the tech community.
                 </h4>
             </div>
-            <div className="grid gap-x-4 gap-y-10 grid-cols-2 md:gap-x-6 lg:grid-cols-4 mb-8">
+            <div className="grid gap-x-4 gap-y-10 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-4">
                 <div>
                     <a
                         href="https://registrations.ieeesrmist.com/protocol"
