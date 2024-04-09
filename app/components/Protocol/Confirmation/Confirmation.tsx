@@ -3,11 +3,11 @@ import { useSpring } from 'react-spring';
 import html2canvas from 'html2canvas';
 
 interface TeamMember {
-    name: string;
-    registerNumber: string;
-    email: string;
-    department: string;
-    contactNumber: string;
+    name?: string;
+    registerNumber?: string;
+    email?: string;
+    department?: string;
+    contactNumber?: string;
 }
 
 interface ConfirmationProps {
