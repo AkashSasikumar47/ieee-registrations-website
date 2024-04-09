@@ -213,7 +213,30 @@ const RegistrationForm = () => {
                         </div>
                         <div>
                             <label htmlFor="team-size" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Team Size (Max-2)*</label>
-                            <input value={teamDetails.teamSize} onChange={(e) => setMembersNo(e.target.valueAsNumber)} type="number" name="team-size" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" max="2" min="1" />
+                            <div className="mt-4">
+                                <label className="inline-flex items-center mr-4">
+                                    <input
+                                        type="radio"
+                                        name="teamSize"
+                                        value="1"
+                                        checked={teamDetails.teamSize === 1}
+                                        onChange={(e) => handleInputChange('teamSize', parseInt(e.target.value))}
+                                        className="form-radio h-5 w-5 text-indigo-600 transition duration-150 ease-in-out"
+                                    />
+                                    <span className="ml-2 text-sm text-gray-800">1</span>
+                                </label>
+                                <label className="inline-flex items-center">
+                                    <input
+                                        type="radio"
+                                        name="teamSize"
+                                        value="2"
+                                        checked={teamDetails.teamSize === 2}
+                                        onChange={(e) => handleInputChange('teamSize', parseInt(e.target.value))}
+                                        className="form-radio h-5 w-5 text-indigo-600 transition duration-150 ease-in-out"
+                                    />
+                                    <span className="ml-2 text-sm text-gray-800">2</span>
+                                </label>
+                            </div>
                         </div>
                         <div>
                             <label htmlFor="members-name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Member's Name*</label>
