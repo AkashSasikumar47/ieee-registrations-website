@@ -42,16 +42,16 @@ const RegistrationForm = () => {
                     throw new Error("Team name already exists. Please choose a different name.");
                 }
                 teamCount = teamNamesArray.length;
-                // await updateDoc(teamNamesDocRef, {
-                //     teamNames: [...teamNamesArray, teamDetails.teamName]
-                // });
+                await updateDoc(teamNamesDocRef, {
+                    teamNames: [...teamNamesArray, teamDetails.teamName]
+                });
             } else {
                 throw new Error("Connot get Team document. Try again later.");
             }
             
             const teamDocName = `${teamCount.toString()}-${teamDetails.teamName}`;
-            const teamDocRef = doc(db, 'protocol_1', teamDocName);
-            // await setDoc(teamDocRef, { teamDetails });
+            const teamDocRef = doc(db, 'protocol_1_test', teamDocName);
+            await setDoc(teamDocRef, { teamDetails });
             console.log("Document written with ID: ", teamDocName);
             return true;
     
@@ -79,15 +79,6 @@ const RegistrationForm = () => {
         setTeamDetails((prev) => ({
             ...prev,
             [field]: value,
-        }));
-    };
-    const handleMemberInputChange = (memberNo: number, field: string, value: string) => {
-        setTeamDetails((prev) => ({
-            ...prev,
-            [`teamMember${memberNo}`]: {
-                ...prev[`teamMember${memberNo}`],
-                [field]: value,
-            },
         }));
     };
 
@@ -119,10 +110,6 @@ const RegistrationForm = () => {
           setIsModalOpen(true);
           return false;
         }
-      
-        // if (!validateContactNumber(teamDetails.teamMember1?.contactNumber)) {
-        //   return false;
-        // }
 
         if (!validateMember(teamDetails['teamMember1'], 1)) {
             return false;
@@ -205,7 +192,7 @@ const RegistrationForm = () => {
 
     return (
         <div className="max-w-screen-xl mx-auto px-4 py-4 md:px-8 md:py-4 mt-16">
-            <div className="mx-auto mb-10 text-center">
+             <div className="mx-auto mb-10 text-center">
                 <h3 className="mb-2 sm:mb-4 font-sans font-semibold text-blue-800 text-xs lg:text-base">
                     REGISTER
                 </h3>
