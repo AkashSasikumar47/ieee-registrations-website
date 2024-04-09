@@ -17,7 +17,7 @@ const Register = () => {
             <div className="grid gap-x-4 gap-y-10 grid-cols-2 md:gap-x-6 lg:grid-cols-4 mb-8">
                 <div>
                     <a
-                        href="https://registrations.ieeesrmist.com/protocol"
+                        href="/protocol"
                         className="group mb-2 block h-120 overflow-hidden bg-gray-100 lg:mb-3"
                     >
                         <img
@@ -61,7 +61,7 @@ const Register = () => {
                 </div>
                 <div>
                     <a
-                        href="https://registrations.ieeesrmist.com/hacktrix"
+                        href="/hacktrix"
                         className="group mb-2 block h-120 overflow-hidden bg-gray-100 lg:mb-3"
                     >
                         <img
