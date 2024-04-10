@@ -59,9 +59,9 @@ const Confirmation: React.FC<ConfirmationProps> = ({
                 </div>
                 <div className="relative aspect-square overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto">
                     <img
-                        src="/assets/Protocol/img/Registration_Confirmed.png"
+                        src="/assets/Protocol/img/Registration_Confirmed.jpg"
                         loading="lazy"
-                        alt="Protocol"
+                        alt="Protocol_Registration_Confirmed"
                         className="absolute inset-0 aspect-square h-full w-full object-cover object-center"
                     />
                 </div>
