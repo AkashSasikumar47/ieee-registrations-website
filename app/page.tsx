@@ -16,15 +16,8 @@ const HomePage: React.FC = () => {
       <Head>
         <title>Registrations | IEEE SRM</title>
         <meta name="description" content="Unlock Exclusive Access to Exciting Events and Workshops" />
-        <meta name="keywords" content="Registrations, IEEE SRM, innovation, ideation, opportunities, events, hackathon, workshop" />
+        <meta name="keywords" content="Hackathon, Tech Challenge, Coding Competition, Innovation Contest, Hactrix-24, PROTOCOL 1.0, ByteBurst, Igniting Innovation, Digital Era Tech Event, Coding, Programming, Software Development, Tech Trends, Innovation Showcase, IEEE SRM Student Branch, Student Collaboration, Student Tech Enthusiasts, Student Innovation Network, Inclusivity in Tech, Diversity in Innovation, Women in Technology, Tech for All, Tech Networking, Collaboration Opportunities, Team Building, Industry Connections, Technical Skills, Learning and Growth, Skill Enhancement, Professional Development, Register for Hactrix-24, Tech Event Registration, ByteBurst Registration, Hackathon Signup, Mentorship Program, Tech Mentors, Guidance and Support, Learn from Experts, Project Awards, Recognition in Tech, Certificates for Innovation, Outstanding Projects" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/Assets/apple-touch-icon.png" />
-        <meta property="og:title" content="Registrations | IEEE SRM" />
-        <meta property="og:description" content="Unlock Exclusive Access to Exciting Events and Workshops" />
-        <meta property="og:image" content="/Images/Event_Images/Banner1.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://registrations.ieeesrmist.com" />
       </Head>
 
       <Navbar />

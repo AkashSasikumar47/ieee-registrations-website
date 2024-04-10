@@ -25,7 +25,7 @@ const RegistrationClose = () => {
                                 <div className="mt-6 gap-3 flex justify-center">
                                     <a
                                         href="mailto:ieee@srmist.edu.in"
-                                        className="py-4 px-6 inline-flex items-center gap-x-2 text-md font-bold rounded-full border border-transparent bg-orange text-white hover:bg-black transform transition-transform duration-300 hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
+                                        className="py-4 px-6 inline-flex items-center gap-x-2 text-md font-bold rounded-full border border-transparent bg-orange-500 text-white hover:bg-black transform transition-transform duration-300 hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
                                     >
                                         Contact Us
                                     </a>
