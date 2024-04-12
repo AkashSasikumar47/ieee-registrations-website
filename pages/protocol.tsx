@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 import Navbar from '@/app/components/Protocol/Navbar/Navbar';
 import RegistrationForm from '@/app/components/Protocol/RegistrationForm/RegistrationForm';
+import RegistrationClose from '@/app/components/Protocol/RegistrationClose/RegistrationClose';
 import Footer from '@/app/components/Protocol/Footer/Footer';
 
 import '../app/globals.css';
@@ -18,7 +19,7 @@ const Protocol = () => {
             </Head>
 
             <Navbar />
-            <RegistrationForm />
+            <RegistrationClose />
             <Footer />
         </div>
     );
