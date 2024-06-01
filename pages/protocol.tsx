@@ -19,7 +19,7 @@ const Protocol = () => {
             </Head>
 
             <Navbar />
-            <RegistrationClose />
+            <RegistrationForm />
             <Footer />
         </div>
     );
