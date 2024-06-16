@@ -23,7 +23,7 @@ const Footer = () => {
                     aria-label="Brand"
                 >
                     <img
-                        src="/assets/IEEE/Logo/IEEE SRM SB.png"
+                        src="/assets/IEEE/Logo/IEEE-LOGO.svg"
                         alt="IEEE SRM SB"
                         className="w-36 h-16"
                         loading="lazy"
