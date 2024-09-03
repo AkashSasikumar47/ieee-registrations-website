@@ -13,7 +13,7 @@ const Hero_reg = () => {
             className="mb-4 font-bold text-white text-4xl lg:text-5xl"
             showGenerating={false}
             text={title}
-            speed={30}
+            speed={35}
             complete={() => setTitleComplete(true)}
         />
         {titleComplete && (<GenContent

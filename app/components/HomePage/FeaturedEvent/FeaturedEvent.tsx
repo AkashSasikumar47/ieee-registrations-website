@@ -42,7 +42,7 @@ const FeaturedEvent = () => {
 
             <div className="relative flex justify-center mt-6">
                 <a
-                    href="https://registrations.ieeesrmist.com/evolve"
+                    href="/evolve"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full h-auto"
@@ -61,8 +61,8 @@ const FeaturedEvent = () => {
                         animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
                     >
-                        <span className="mb-16 md:mb-32 lg:mb-40 text-white font-bold text-4xl md:text-6xl lg:text-8xl hover:text-cyan-500 transition duration-300">
-                            REGISTER
+                        <span className="mb-16 md:mb-32 lg:mb-40 text-white font-bold text-3xl md:text-5xl lg:text-7xl hover:text-cyan-500 transition duration-300">
+                            CLICK TO REGISTER
                         </span>
                     </motion.div>
                 </a>

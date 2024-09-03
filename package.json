@@ -12,10 +12,11 @@
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@react-hook/media-query": "^1.1.1",
+    "dom-to-image": "^2.6.0",
     "firebase": "^10.6.0",
     "framer-motion": "^11.3.31",
     "html2canvas": "^1.4.1",
-    "next": "^14.1.0",
+    "next": "^14.2.7",
     "next-seo": "^6.5.0",
     "react": "^18",
     "react-dom": "^18.2.0",
@@ -26,6 +27,7 @@
     "vercel": "^32.3.0"
   },
   "devDependencies": {
+    "@types/dom-to-image": "^2.6.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
