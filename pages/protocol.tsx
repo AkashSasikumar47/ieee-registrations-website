@@ -10,7 +10,7 @@ import '../app/globals.css';
 
 const Protocol = () => {
     return (
-        <div>
+        <div className="bg-white">
             <Head>
                 <title>PROTOCOL 1.0 | Hackathon by IEEE SRMIST</title>
                 <meta name="description" content="Empower Computer Science and Engineering students to innovate and create impactful solutions using cutting-edge technologies in a supportive online environment. Join PROTOCOL 1.0 hackathon now!" />
@@ -19,7 +19,7 @@ const Protocol = () => {
             </Head>
 
             <Navbar />
-            <RegistrationForm />
+            <RegistrationClose />
             <Footer />
         </div>
     );

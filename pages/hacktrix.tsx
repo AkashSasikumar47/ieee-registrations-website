@@ -10,7 +10,7 @@ import '../app/globals.css';
 
 const HackTrix = () => {
     return (
-        <div>
+        <div className="bg-white">
             <Head>
                 <title>HackTrix | Hackathon by IEEE SRMIST</title>
                 <meta name="description" content="Hacking makes you lose CTRL;" />

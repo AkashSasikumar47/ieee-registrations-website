@@ -79,9 +79,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
         }));
     };
 
-
-
-
     const validateForm = () => {
 
         if (!participantDetails.name.trim()) {
@@ -128,7 +125,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
             setIsModalOpen(true);
             return false;
         }
-
 
         return true;
     };
@@ -180,123 +176,131 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
 
     return (
         <div>
-
-            <div className="max-w-[85rem] lg:rounded-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-10 mx-auto font-body">
-                <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-4 lg:py-6 mx-auto">
-                    <div className="grid items-center md:grid-cols-2 gap-8 lg:gap-12">
-
-                        {/* Hero */}
-                        <Hero_reg />
-
-                        {/* Form */}
-                        {isDone ? (
-                            <Confirmation
-                                name={participantDetails.name}
-                                registerNumber={participantDetails.registerNumber}
-                                email={participantDetails.email}
-                                department={participantDetails.department}
-                                contactNumber={participantDetails.contactNumber}
-                            />
-                        ) : (
+            <div className="max-w-screen-xl bg-black mx-auto px-4 py-6 md:px-8 md:py-10 mb-8">
+                <div className="mockup-browser bg-gray-900 border border-gray-900 max-w-screen-xl">
+                    <div className="mockup-browser-toolbar">
+                        <div className="input">https://evolve.ieeesrmist.com</div>
+                    </div>
+                    <div className="bg-black flex justify-center px-4 md:px-8 py-16">
+                        <div className="grid items-center md:grid-cols-2 gap-8 lg:gap-12">
+                            {/* Hero */}
                             <div>
-                                <form onSubmit={handleSubmit}>
-                                    <div className="lg:max-w-lg lg:mx-auto lg:me-0 ms-auto">
-                                        <div className="p-4 sm:p-7 flex flex-col bg-[#212121] rounded-2xl shadow-xl">
-                                            <div className="text-center">
-                                                <h1 className="block text-2xl font-bold text-white">
-                                                    E-Volve Registration Form
-                                                </h1>
-                                                <p className="mt-2 text-sm text-white">
-                                                    Register individually and be a part of our exciting Generative AI Workshop.
-                                                </p>
-                                            </div>
+                                <div className="mt-4 md:mb-12 max-w-2xl">
+                                    <h1 className="mb-4 md:mb-6 font-sans font-bold text-white text-2xl sm:text-4xl">
+                                        Explore Gen-AI Today: <br /> Join E-VOLVE
+                                    </h1>
+                                    <p className="mx-auto font-sans font-base text-neutral-400 text-sm sm:text-lg">
+                                        Join us for E-Volve: A Generative AI Workshop exclusively for our college community! This is your chance to dive deep into the world of AI, collaborate with fellow students, and explore innovative ideas. Whether you're passionate about technology, eager to learn new skills, or ready to push the boundaries of AI, E-Volve is the perfect opportunity to showcase your talents and be part of something groundbreaking. Don't miss out on this exciting journey of discovery and innovation!
+                                    </p>
+                                </div>
+                            </div>
 
-                                            <div className="mt-5">
+                            {/* Form */}
+                            {isDone ? (
+                                <Confirmation
+                                    name={participantDetails.name}
+                                    registerNumber={participantDetails.registerNumber}
+                                    email={participantDetails.email}
+                                    department={participantDetails.department}
+                                    contactNumber={participantDetails.contactNumber}
+                                />
+                            ) : (
+                                <div>
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="lg:max-w-lg lg:mx-auto lg:me-0 ms-auto">
+                                            <div className="p-4 sm:p-7 flex flex-col bg-gray-900 rounded-2xl shadow-xl">
+                                                <div className="text-center">
+                                                    <h1 className="block text-xl md:text-2xl font-bold text-white">
+                                                        E-VOLVE Registration Form
+                                                    </h1>
+                                                    <p className="mt-2 text-sm text-white">
+                                                        Register individually and be a part of our exciting Generative AI Workshop.
+                                                    </p>
+                                                </div>
 
-                                                {/* Input Field */}
-                                                <div>
-                                                    <div className="lg:grid gap-4 lg:grid-cols-2 font-body font-normal">
-                                                        <input
-                                                            type="text"
-                                                            className="py-3 px-5 block w-full mb-4 lg:mb-0 border border-gray-700 bg-gray-900 hover:border-gray-600 focus:border-[#00F0FF] rounded-full text-sm text-white placeholder-gray-400 disabled:opacity-50 disabled:pointer-events-none"
-                                                            placeholder="Name"
-                                                            value={participantDetails.name}
-                                                            onChange={(e) => handleInputChange('name', e.target.value)}
-                                                        />
-
-
-                                                        <input
-                                                            type="text"
-                                                            className="py-3 px-5 block w-full mb-4 lg:mb-0 border border-gray-700 bg-gray-900 hover:border-gray-600 focus:border-[#00F0FF] rounded-full text-sm text-white placeholder-gray-400 disabled:opacity-50 disabled:pointer-events-none"
-                                                            placeholder="Register Number"
-                                                            value={participantDetails.registerNumber || ''}
-                                                            onChange={(e) => handleInputChange('registerNumber', e.target.value)}
-                                                        />
-
-
-                                                        <input
-                                                            type="email"
-                                                            className="py-3 px-5 block w-full mb-4 lg:mb-0 border border-gray-700 bg-gray-900 hover:border-gray-600 focus:border-[#00F0FF] rounded-full text-sm text-white placeholder-gray-400 disabled:opacity-50 disabled:pointer-events-none"
-                                                            placeholder="Participant's Email"
-                                                            value={participantDetails.email || ''}
-                                                            onChange={(e) => handleInputChange('email', e.target.value)}
-                                                        />
-
-
-                                                        <input
-                                                            type="text"
-                                                            className="py-3 px-5 block w-full mb-4 lg:mb-0 border border-gray-700 bg-gray-900 hover:border-gray-600 focus:border-[#00F0FF] rounded-full text-sm text-white placeholder-gray-400 disabled:opacity-50 disabled:pointer-events-none"
-                                                            placeholder="Department"
-                                                            value={participantDetails.department || ''}
-                                                            onChange={(e) => handleInputChange('department', e.target.value)}
-                                                        />
+                                                <div className="mt-5">
+                                                    {/* Input Field */}
+                                                    <div>
+                                                        <div className="lg:grid gap-4 lg:grid-cols-2 font-body font-normal">
+                                                            <input
+                                                                type="text"
+                                                                className="py-3 px-5 block w-full mb-4 lg:mb-0 border border-gray-700 bg-gray-900 hover:border-gray-600 focus:border-[#00F0FF] rounded-full text-sm text-white placeholder-gray-400 disabled:opacity-50 disabled:pointer-events-none"
+                                                                placeholder="Name"
+                                                                value={participantDetails.name}
+                                                                onChange={(e) => handleInputChange('name', e.target.value)}
+                                                            />
 
 
-                                                        <input
-                                                            type="text"
-                                                            pattern="[0-9]{10}"
-                                                            title="10-digit phone number required"
-                                                            className="py-3 px-5 block w-full mb-4 lg:mb-0 border border-gray-700 bg-gray-900 hover:border-gray-600 focus:border-[#00F0FF] rounded-full text-sm text-white placeholder-gray-400 disabled:opacity-50 disabled:pointer-events-none"
-                                                            placeholder="Contact Number"
-                                                            value={participantDetails.contactNumber || ''}
-                                                            onChange={(e) => handleInputChange('contactNumber', e.target.value)}
-                                                        />
+                                                            <input
+                                                                type="text"
+                                                                className="py-3 px-5 block w-full mb-4 lg:mb-0 border border-gray-700 bg-gray-900 hover:border-gray-600 focus:border-[#00F0FF] rounded-full text-sm text-white placeholder-gray-400 disabled:opacity-50 disabled:pointer-events-none"
+                                                                placeholder="Register Number"
+                                                                value={participantDetails.registerNumber || ''}
+                                                                onChange={(e) => handleInputChange('registerNumber', e.target.value)}
+                                                            />
 
 
+                                                            <input
+                                                                type="email"
+                                                                className="py-3 px-5 block w-full mb-4 lg:mb-0 border border-gray-700 bg-gray-900 hover:border-gray-600 focus:border-[#00F0FF] rounded-full text-sm text-white placeholder-gray-400 disabled:opacity-50 disabled:pointer-events-none"
+                                                                placeholder="Participant's Email"
+                                                                value={participantDetails.email || ''}
+                                                                onChange={(e) => handleInputChange('email', e.target.value)}
+                                                            />
+
+
+                                                            <input
+                                                                type="text"
+                                                                className="py-3 px-5 block w-full mb-4 lg:mb-0 border border-gray-700 bg-gray-900 hover:border-gray-600 focus:border-[#00F0FF] rounded-full text-sm text-white placeholder-gray-400 disabled:opacity-50 disabled:pointer-events-none"
+                                                                placeholder="Department"
+                                                                value={participantDetails.department || ''}
+                                                                onChange={(e) => handleInputChange('department', e.target.value)}
+                                                            />
+
+
+                                                            <input
+                                                                type="text"
+                                                                pattern="[0-9]{10}"
+                                                                title="10-digit phone number required"
+                                                                className="py-3 px-5 block w-full mb-4 lg:mb-0 border border-gray-700 bg-gray-900 hover:border-gray-600 focus:border-[#00F0FF] rounded-full text-sm text-white placeholder-gray-400 disabled:opacity-50 disabled:pointer-events-none"
+                                                                placeholder="Contact Number"
+                                                                value={participantDetails.contactNumber || ''}
+                                                                onChange={(e) => handleInputChange('contactNumber', e.target.value)}
+                                                            />
+
+
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Register Button */}
+                                                    <div className="mt-6">
+                                                        <button
+                                                            type="submit"
+                                                            className="w-full gap-x-2 py-3 px-3 inline-flex justify-center items-center bg-cyan-400 text-black font-medium text-sm text-neutral-800 rounded-full focus:outline-none transform transition-transform hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
+                                                            disabled={isLoading}
+                                                        >
+                                                            {isLoading ? (
+                                                                <div className="flex items-center">
+                                                                    <span className="animate-spin mr-2">&#10227;</span> Loading
+                                                                </div>
+                                                            ) : (
+                                                                'REGISTER'
+                                                            )}
+                                                        </button>
                                                     </div>
                                                 </div>
-
-
-                                                {/* Register Button */}
-                                                <div className="mt-6">
-                                                    <button
-                                                        type="submit"
-                                                        className="w-full py-3 px-4 inline-flex justify-center items-center bg-[#00F0FF] gap-x-2 text-sm font-body font-semibold rounded-lg border border-transparent bg-orange text-black transform transition-transform hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
-                                                        disabled={isLoading}
-                                                    >
-                                                        {isLoading ? (
-                                                            <div className="flex items-center">
-                                                                <span className="animate-spin mr-2">&#10227;</span> Loading
-                                                            </div>
-                                                        ) : (
-                                                            'REGISTER'
-                                                        )}
-                                                    </button>
-                                                </div>
-
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>)}
+                                    </form>
+                                </div>)}
+                        </div>
+                        {isModalOpen && (
+                            <ModalPopup message={errorMessage} onClose={() => setIsModalOpen(false)} />
+                        )}
                     </div>
-                    {isModalOpen && (
-                        <ModalPopup message={errorMessage} onClose={() => setIsModalOpen(false)} />
-                    )}
                 </div>
             </div>
-
-        </div>
+        </div >
     )
 }
 
