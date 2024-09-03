@@ -26,6 +26,8 @@ module.exports = {
         '7xl': '5rem',
         '8xl': '6rem',
         '9xl': '8rem',
+        '10xl': '10rem',
+        '14xl': '14rem',
       },
       fontWeight: {
         normal: '400',
@@ -69,5 +71,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 }

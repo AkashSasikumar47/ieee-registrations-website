@@ -37,17 +37,17 @@ const Register = () => {
     return (
         <section className="max-w-screen-xl mx-auto px-4 py-6 md:px-8 md:py-10">
             <div className="mx-auto mb-10 items-center justify-center text-center">
-                <h3 className="mb-2 sm:mb-4 font-sans font-semibold text-purple-800 text-xs lg:text-normal">
-                    REGISTER
+                <h3 className="mb-2 sm:mb-4 font-sans font-semibold text-cyan-500 text-xs lg:text-normal">
+                    PAST EVENTS
                 </h3>
                 <h2 className="mb-4 md:mb-6 font-sans font-bold text-black text-2xl sm:text-4xl">
-                    Register for our Events
+                    Highlights from Our Previous Events
                 </h2>
                 <h4 className="max-w-2xl mx-auto font-sans font-base text-gray-400 text-sm sm:text-lg">
-                    Explore our exciting lineup of events designed to foster innovation, learning, and collaboration within the tech community.
+                    Discover the success stories and memorable moments from our previous events. See how we’ve fostered innovation and built community.
                 </h4>
             </div>
-            <div className="mt-16 grid gap-x-4 gap-y-10 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-4">
+            <div className="mt-16 grid gap-x-4 gap-y-10 grid-cols-2 md:gap-x-6 lg:grid-cols-4">
                 {eventData.map((event, index) => (
                     <EventItem key={index} event={event} index={index} />
                 ))}

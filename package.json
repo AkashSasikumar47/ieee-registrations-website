@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@react-hook/media-query": "^1.1.1",
     "firebase": "^10.6.0",
-    "framer-motion": "^11.0.25",
+    "framer-motion": "^11.3.31",
     "html2canvas": "^1.4.1",
     "next": "^14.1.0",
     "next-seo": "^6.5.0",
@@ -28,6 +30,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.17",
+    "daisyui": "^4.12.10",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
