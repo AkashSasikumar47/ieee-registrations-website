@@ -2,7 +2,7 @@
 
 The IEEE Registrations Website is designed to facilitate registrations for IEEE events and activities. It provides a user-friendly interface for participants to sign up for events and manage their registrations. The website is built using Next.js, React, and Firebase.
 
-![IEEE Registrations Website](public/assets/IEEE/img/ieee-registrations-website.jpg)
+![IEEE Registrations Website](public/assets/IEEE/img/Registratino-bg.png)
 
 ## Features
 
