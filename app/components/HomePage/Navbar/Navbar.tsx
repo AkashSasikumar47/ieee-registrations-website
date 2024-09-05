@@ -38,7 +38,7 @@ const Navbar = () => {
                     <div className='ps-px md:py-4 px-4'>
                         <a
                             className="group inline-flex items-center gap-x-2 py-2 px-3 bg-cyan-400 text-black font-medium text-sm text-neutral-800 rounded-full focus:outline-none"
-                            href="https://registrations.ieeesrmist.com/"
+                            href="/contact"
                         >
                             Contact Us
                         </a>
