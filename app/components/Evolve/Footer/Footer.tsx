@@ -21,7 +21,7 @@ const Footer = () => {
                 <div>
                     <a
                         className="flex-none text-sm font-head font-extrabold text-neonCyan"
-                        href="#"
+                        href="https://evolve.ieeesrmist.com/"
                         aria-label="Brand"
                     >
                         <motion.img

@@ -122,6 +122,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
             return false;
         }
 
+        if (!/^\d{10}$/.test(participantDetails.contactNumber.trim())) {
+            setErrorMessage('Contact number should be a 10 digit number');
+            setIsModalOpen(true);
+            return false;
+        }
+
         return true;
     };
 
@@ -183,7 +189,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                     className="mockup-browser bg-gray-900 border border-gray-900 max-w-screen-xl"
                 >
                     <div className="mockup-browser-toolbar">
-                        <div className="input">https://evolve.ieeesrmist.com</div>
+                        <div className="input"><a href='https://evolve.ieeesrmist.com'>https://evolve.ieeesrmist.com</a></div>
                     </div>
                     <div className="bg-black flex justify-center px-4 md:px-8 py-16">
                         <motion.div
@@ -307,6 +313,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                                                 </div>
                                             </div>
                                         </div>
+                                        {isModalOpen && (
+                                            <ModalPopup
+                                                message={errorMessage}
+                                                onClose={() => setIsModalOpen(false)}
+                                            />
+                                        )}
                                     </form>
                                 </motion.div>
                             )}
