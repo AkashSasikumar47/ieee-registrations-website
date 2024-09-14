@@ -9,13 +9,6 @@ import Footer from '@/app/components/Evolve/Footer/Footer';
 import '../app/globals.css';
 
 const Evolve = () => {
-
-    const [registrationClose, setRegistrationClose] = useState(false);
-
-    useEffect(() => {
-
-    }, [registrationClose]);
-
     return (
         <div className='bg-black'>
             <Head>
@@ -26,13 +19,7 @@ const Evolve = () => {
             </Head>
 
             <Navbar />
-
-            {registrationClose && <RegistrationClose />}
-
-            {!registrationClose && <RegistrationForm
-                registrationClose={() => setRegistrationClose(true)}
-            />}
-
+            <RegistrationClose />
             <Footer />
         </div>
     );

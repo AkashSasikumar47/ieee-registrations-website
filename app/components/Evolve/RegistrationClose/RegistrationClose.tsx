@@ -1,42 +1,57 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const RegistrationClose = () => {
     return (
-        <div>
-
-            <div className="relative overflow-hidden">
-                <div className="relative z-10">
-                    <div className="max-w-[85rem] mt-8 mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
-                        <div className="max-w-2xl text-center mx-auto">
-                            <p className="inline-block text-sm font-body text-[#00F0FF] font-bold">
-                                REGISTRATIONS CLOSED
-                            </p>
-                            <div className="mt-5 max-w-2xl">
-                                <h1 className="block font-body font-bold text-white text-4xl md:text-6xl lg:text-6xl">
-                                    Thank You for 220+ Participants!
-                                </h1>
-                            </div>
-                            <div className="mt-5 max-w-3xl">
-                                <p className="text-base lg:text-lg font-body text-[#FF00FF]">
-                                    Stay Tuned for beginning of E-volve
-                                </p>
-                            </div>
-                            <div className="mt-8 gap-3 flex justify-center">
-                                <div className="mt-6 gap-3 flex justify-center">
-                                    <a
-                                        href="mailto:ieee@srmist.edu.in"
-                                        className="py-4 px-6 inline-flex items-center gap-x-2 text-md font-bold rounded-full border border-transparent bg-[#00F0FF] text-black  transform transition-transform duration-300 hover:scale-105 disabled:opacity-50 disabled:pointer-events-none"
-                                    >
-                                        Contact Us
-                                    </a>
-                                </div>
-                            </div>
+        <section className="max-w-screen-xl mx-auto px-4 py-6 md:px-8 md:py-10">
+            <div className="mx-auto mb-10 items-center justify-center text-center">
+                <motion.h3
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="mt-24 mb-2 sm:mb-4 font-sans font-semibold text-cyan-500 text-xs lg:text-normal"
+                >
+                    REGISTRATIONS CLOSED
+                </motion.h3>
+                <motion.h2
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.4 }}
+                    viewport={{ once: true }}
+                    className="mb-4 md:mb-6 font-sans font-bold text-white text-2xl sm:text-4xl"
+                >
+                    Thank You for 220+ Participants!
+                </motion.h2>
+                <motion.h4
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.6 }}
+                    viewport={{ once: true }}
+                    className="max-w-2xl mx-auto font-sans font-base text-gray-400 text-sm sm:text-lg"
+                >
+                    Stay Tuned for beginning of E-volve
+                </motion.h4>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                    viewport={{ once: true }}
+                >
+                    <div className="mt-8 gap-3 flex justify-center">
+                        <div className="mt-6 gap-3 flex justify-center">
+                            <a
+                                className="group inline-flex items-center gap-x-2 py-2 px-3 bg-cyan-400 text-black font-medium text-sm text-neutral-800 rounded-full focus:outline-none"
+                                href="/contact"
+                            >
+                                Contact Us
+                            </a>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
-
-        </div>
+        </section>
     );
 };
 
