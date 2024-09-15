@@ -30,7 +30,7 @@ const Navbar = () => {
         >
             <nav className="relative max-w-screen-xl w-full py-2.5 px-5 flex md:items-center justify-between md:py-0 mx-2 lg:mx-auto">
                 <div className="flex items-center justify-between">
-                    <a href="/" className="inline-flex items-center gap-2.5 text-2xl font-bold text-black md:text-3xl" aria-label="logo">
+                    <a href="https://www.ieeesrmist.com/" target='_blank' className="inline-flex items-center gap-2.5 text-2xl font-bold text-black md:text-3xl" aria-label="logo">
                         <img src="/assets/IEEE/Logo/IEEE-LOGO-White.png" alt="IEEE SRM SB" className="h-8 md:h-12" />
                     </a>
                 </div>

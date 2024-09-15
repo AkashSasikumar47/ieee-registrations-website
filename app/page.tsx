@@ -4,6 +4,7 @@ import React from 'react';
 import Head from 'next/head';
 
 import Hero from './components/HomePage/Hero/Hero';
+import Recruitments from './components/HomePage/Recruitments/Recruitments';
 import FeaturedEvent from './components/HomePage/FeaturedEvent/FeaturedEvent';
 import Register from './components/HomePage/Register/Register';
 import Footer from './components/HomePage/Footer/Footer';
@@ -21,6 +22,7 @@ const HomePage: React.FC = () => {
       </Head>
 
       <Hero />
+      <Recruitments />
       <FeaturedEvent />
       <Register />
       <Footer />

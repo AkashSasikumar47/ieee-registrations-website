@@ -49,7 +49,7 @@ const Confirmation: React.FC<ConfirmationProps> = ({
         <div className="p-6 flex flex-col items-center rounded-lg shadow-2xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white" ref={componentRef} style={{ maxWidth: '400px', margin: 'auto' }}>
             {/* Header Section */}
             <div className="mb-6 w-full">
-                <img src="/assets/IEEE/Logo/IEEE-LOGO-White.png" alt="IEEE-LOGO Logo" className="mx-auto w-48" />
+                <img src="/Assets/Evolve/E-VOLVE.svg" alt="E-volve Logo" className="mx-auto w-48" />
                 <h2 className="mt-4 text-center text-xl font-bold tracking-wide text-cyan-300">Event Registration Confirmation</h2>
             </div>
 
