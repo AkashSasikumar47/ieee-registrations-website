@@ -23,7 +23,6 @@ const HomePage: React.FC = () => {
 
       <Hero />
       <Recruitments />
-      <FeaturedEvent />
       <Register />
       <Footer />
     </div>
